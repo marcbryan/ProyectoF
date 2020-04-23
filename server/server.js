@@ -20,7 +20,7 @@ mongoose.connect(URI, {
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Connection error:'));
 db.once('open', function() {
-    console.log('Connected succesfully!!');
+    // Connected succesfully
     app.listen(PORT, function() {
         console.log('Example app listening on port '+PORT);
     });
