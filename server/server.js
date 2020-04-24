@@ -2,6 +2,12 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+var apiRouter = require('./routes/API');
+app.use('/api', apiRouter);
+
 // Variables entorno
 const PORT = process.env.PORT || 3000;
 var host = process.env.HOST;
