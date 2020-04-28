@@ -24,7 +24,9 @@ var UserSchema = new Schema({
 
 
 /**
- * TODO: Añadir comentario función
+ * Convierte el timestamp createdAt en el formato DD/MM/YYYY HH:mm:ss y elimina id y password
+ * al convertir el modelo en un objeto JSON al utilizar la función toJSON
+ * @override
  */
 UserSchema.methods.toJSON = function() {
     var obj = this.toObject();
@@ -32,6 +34,13 @@ UserSchema.methods.toJSON = function() {
     delete obj._id;
     delete obj.password;
     return obj;
+}
+
+/**
+ * Función para hashear la contraseña, asigna al atributo password la contraseña hasheada
+ */
+UserSchema.methods.setPasswordAsHash = function() {
+    this.password = crypto.createHash('sha256').update(this.password).digest('hex');
 }
    
 
@@ -44,7 +53,10 @@ UserSchema.statics.hashPassword = function(strPwd) {
     return crypto.createHash('sha256').update(strPwd).digest('hex');
 }
 
-// TODO: Añadir comentario
+/** 
+ * Convierte el timestamp createdAt del modelo
+ * @return {string} La fecha en formato DD/MM/YYYY HH:mm:ss
+ */
 UserSchema.virtual('str_createdAt')
     .get(function() {
         return moment(this.createdAt).format('DD/MM/YYYY HH:mm:ss');
