@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; background: linear-gradient(180deg, #6A5A5A 0%, rgba(255, 255, 255, 0) 100%), #CF4444; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+app-root {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
