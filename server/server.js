@@ -1,9 +1,11 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 require('dotenv').config();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(cors());
 
 var apiRouter = require('./routes/API');
 app.use('/api', apiRouter);
@@ -28,6 +30,6 @@ db.on('error', console.error.bind(console, 'Connection error:'));
 db.once('open', function() {
     // Connected succesfully
     app.listen(PORT, function() {
-        console.log('Example app listening on port '+PORT);
+        console.log('Server listening on port '+PORT);
     });
 });
