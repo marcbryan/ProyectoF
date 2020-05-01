@@ -1,5 +1,7 @@
 var User = require('../models/User');
 var validator = require('email-validator');
+var jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 /** Comprueba si los datos enviados por un usuario son válidos para hacer login (POST) */
 exports.user_login = function (req, res) {
@@ -15,14 +17,16 @@ exports.user_login = function (req, res) {
                 return;
             }
             if (isset(document)) {
-                var user = new User(document);
-                res.send({status: 'OK', msg: 'Bienvenido '+user.name+'!', data: user.toJSON()});
+                let user = new User(document);
+                let token = jwt.sign({}, process.env.PRIVATE_KEY);
+                let session = { token: token, expiresIn: 2592000 }; // 30 días
+                res.send({status: 'OK', msg: 'Bienvenido '+user.name+'!', data: user.toJSON(), session: session});
             } else {
-                res.send({status: 'ERROR', msg: 'Correo electrónico y/o contraseña incorrectos'});
+                res.status(403).send({status: 'ERROR', msg: 'Correo electrónico y/o contraseña incorrectos'});
             }
         });
     } else {
-        res.send({status: 'ERROR', msg: 'Correo electrónico y/o contraseña incorrectos'});
+        res.status(403).send({status: 'ERROR', msg: 'Correo electrónico y/o contraseña incorrectos'});
     }
 }
 
@@ -34,7 +38,7 @@ exports.user_create_post = function(req, res) {
     console.log('[INFO] User creation REQ at '+new Date());
     if (isset(req.body.name) && isset(req.body.last_name) && isset(req.body.email) && isset(req.body.password) && isset(req.body.city) && isset(req.body.zipcode) && isset(req.body.phone)) {
         if (!validator.validate(req.body.email)) {
-            res.send({status: 'ERROR', msg: 'El formato del correo electrónico es incorrecto. Vuelve a intentarlo'});
+            res.status(403).send({status: 'ERROR', msg: 'El formato del correo electrónico es incorrecto. Vuelve a intentarlo'});
         } else {
             User.find({
                 $and: [ {$or: [{email: req.body.email}, {phone: req.body.phone}]} ]
@@ -67,18 +71,18 @@ exports.user_create_post = function(req, res) {
                     }
                 });
                 if (emailUsed && phoneUsed) {
-                    res.send({status: 'ERROR', msg: 'El correo electrónico y el número de móvil introducidos ya estan en uso'});
+                    res.status(403).send({status: 'ERROR', msg: 'El correo electrónico y el número de móvil introducidos ya estan en uso'});
                 }
                 else if (emailUsed) {
-                    res.send({status: 'ERROR', msg: 'El correo electrónico introducido ya está en uso'});
+                    res.status(403).send({status: 'ERROR', msg: 'El correo electrónico introducido ya está en uso'});
                 }
                 else if (phoneUsed) {
-                    res.send({status: 'ERROR', msg: 'El número de móvil introducido ya está en uso'});
+                    res.status(403).send({status: 'ERROR', msg: 'El número de móvil introducido ya está en uso'});
                 }
             });
         }
     } else {
-        res.send({status: 'ERROR', msg: 'Faltan datos para poder crear la cuenta. Vuelve a intentarlo'});
+        res.status(403).send({status: 'ERROR', msg: 'Faltan datos para poder crear la cuenta. Vuelve a intentarlo'});
     }
 }
 
@@ -97,5 +101,5 @@ function isset(value) {
 
 function onErrorQuery() {
     console.log(err);
-    res.send({status: 'ERROR', msg: 'Error de base de datos, intentalo más tarde.'});
+    res.status(403).send({status: 'ERROR', msg: 'Error de base de datos, intentalo más tarde.'});
 }

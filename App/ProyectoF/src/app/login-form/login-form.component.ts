@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth/auth.service';
 import { Router } from '@angular/router';
 
@@ -13,11 +14,11 @@ export class LoginFormComponent implements OnInit {
   loginForm: FormGroup;
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required]);
-  loginError = '';
 
 
   constructor(
     public builder: FormBuilder,
+    public snackBar: MatSnackBar,
     public authService: AuthService,
     public router: Router
   ) {
@@ -33,14 +34,12 @@ export class LoginFormComponent implements OnInit {
   login() {
     if (this.loginForm.valid) {
       this.authService.signIn(this.loginForm.value).subscribe((res: any) => {
-        console.log(res);
-        if (res.status == 'ERROR') {
-          this.loginError = res.msg;
-          //this.email.setErrors({failed: true});
-          //this.password.setErrors({failed: true});
-        } else if (res.status == 'OK') {
-          
-        }
+        this.authService.setSession(res.session);
+        this.authService.currentUser = res.data;
+        this.router.navigate(['/mis-entradas']);
+        this.snackBar.open(res.msg, 'Aceptar', {duration: 3000});
+      }, (error: any) => {        
+        this.snackBar.open(error.error.msg, 'Aceptar', {duration: 3000});
       });
     }
   }
@@ -51,12 +50,6 @@ export class LoginFormComponent implements OnInit {
     }
     else if (this.email.hasError('email')) {
       return 'Formato incorrecto';
-    }
-  }
-
-  getLoginError() {
-    if (this.password.hasError('failed')) {
-      return this.loginError;
     }
   }
 

@@ -5,6 +5,8 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Router } from '@angular/router';
 import { User } from './user';
 
+import * as moment from 'moment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +14,7 @@ import { User } from './user';
 export class AuthService {
   endpoint: string = 'http://proyectof.tk/api/user';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-  currentUser = {};
+  currentUser: any;
 
   constructor(private http: HttpClient, public router: Router) {}
 
@@ -25,6 +27,16 @@ export class AuthService {
 
   signUp() {
 
+  }
+
+  /**
+   * Asigna un token y su expiración en LocalStorage
+   * @param res Objeto con un token y su expiración
+   */
+  setSession(res) {
+    const expiresAt = moment().add(res.expiresIn, 'second');
+    localStorage.setItem('access_token', res.token);
+    localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
   }
 
   /**
