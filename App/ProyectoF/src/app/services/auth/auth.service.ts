@@ -25,8 +25,8 @@ export class AuthService {
     return this.http.post<any>(this.endpoint+'/login', user);
   }
 
-  signUp() {
-
+  signUp(user: User) {
+    return this.http.post<any>(this.endpoint+'/create', user);
   }
 
   /**

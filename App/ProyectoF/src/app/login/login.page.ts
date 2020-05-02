@@ -37,9 +37,9 @@ export class LoginPage implements OnInit {
         this.authService.setSession(res.session);
         this.authService.currentUser = res.data;
         this.router.navigate(['/mis-entradas']);
-        this.snackBar.open(res.msg, 'Aceptar', {duration: 3000});
+        this.snackBar.open(res.msg, 'Aceptar', {duration: 2000});
       }, (error: any) => {        
-        this.snackBar.open(error.error.msg, 'Aceptar', {duration: 3000});
+        this.snackBar.open(error.error.msg, 'Aceptar', {duration: 2000});
       });
     }
   }

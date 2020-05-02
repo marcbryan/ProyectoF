@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LoginPage } from './login/login.page';
+import { RegisterPage } from './register/register.page';
 import { MyTicketsPage } from './my-tickets/my-tickets.page';
 
 import { AuthGuard } from './services/auth/auth.guard';
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   // Rutas app
   { path: 'login', component: LoginPage, data: {title: 'Login'} },
+  { path: 'crear-cuenta', component: RegisterPage, data: {title: 'Crear cuenta'} },
   { path: 'mis-entradas', component: MyTicketsPage, data: {title: 'Mis entradas'}, canActivate: [AuthGuard] },
   // De momento las rutas que no existen se redirigen a /login
   { path: '**', redirectTo: 'login' }

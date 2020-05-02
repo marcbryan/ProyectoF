@@ -31,7 +31,7 @@ form {
 
 form > mat-form-field.mat-form-field:first-child { margin-bottom: 20px; }
 
-mat-form-field.mat-form-field, button.mat-button-base { font-size: 16px; }
+.form-container mat-form-field.mat-form-field, .form-container button.mat-button-base { font-size: 16px; }
 
 button.google-login-button { margin-top: 25px; margin-bottom: 10px; }
 
