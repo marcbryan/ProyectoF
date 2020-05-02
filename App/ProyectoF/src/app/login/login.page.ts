@@ -5,12 +5,12 @@ import { AuthService } from '../services/auth/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login-form',
-  templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.css'],
+  selector: 'app-login',
+  templateUrl: './login.page.html',
+  styleUrls: ['./login.page.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class LoginFormComponent implements OnInit {
+export class LoginPage implements OnInit {
   loginForm: FormGroup;
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required]);
