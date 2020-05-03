@@ -3,13 +3,15 @@ require('dotenv').config();
 
 // Imports modelos
 require('../models/User');
+require('../models/Event');
 
 // Variables entorno
 var host = process.env.HOST;
 var db_name = process.env.DBNAME;
 
 var seeds = [
-    require('./seeds/UsersSeeder.js')
+    require('./seeds/UsersSeeder.js'),
+    require('./seeds/EventsSeeder.js')
     // TODO: Añadir los otros seeders
 ];
 var seedsDone = 0;
