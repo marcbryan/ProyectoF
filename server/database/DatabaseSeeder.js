@@ -3,6 +3,8 @@ require('dotenv').config();
 
 // Imports modelos
 require('../models/User');
+require('../models/Business');
+require('../models/BusinessUser');
 require('../models/Event');
 
 // Variables entorno
@@ -11,8 +13,9 @@ var db_name = process.env.DBNAME;
 
 var seeds = [
     require('./seeds/UsersSeeder.js'),
+    require('./seeds/BusinessesSeeder.js'),
+    require('./seeds/BusinessesUsersSeeder.js'),
     require('./seeds/EventsSeeder.js')
-    // TODO: Añadir los otros seeders
 ];
 var seedsDone = 0;
 
@@ -37,6 +40,7 @@ var next = () => {
     if (seedsDone === seeds.length) {
         mongoose.connection.close(function () {
             console.log(`Seeding Completed! (${seedsDone} seeds)`);
+            process.exit(1);
         });
     }
 };
