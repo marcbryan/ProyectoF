@@ -25,13 +25,16 @@ EventSchema.methods.toJSON = function() {
     return obj;
 }
 
-var formatDate = (date) => moment(date).format('DD/MM/YYYY HH:mm:ss');
-
 EventSchema.virtual('str_starts')
-    .get(formatDate = (this.starts));
+    .get(function() {
+        return moment(this.starts).format('DD/MM/YYYY HH:mm:ss');
+    });
 
 EventSchema.virtual('str_ends')
-    .get(formatDate = (this.ends));
+    .get(function() {
+        return moment(this.ends).format('DD/MM/YYYY HH:mm:ss');
+    });
+
 
 module.exports = mongoose.model('Event', EventSchema);
 

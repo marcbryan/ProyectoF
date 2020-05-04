@@ -19,7 +19,7 @@ var getData = () => {
         let name = faker.random.arrayElement(names)+' en '+city;
         let numTickets = faker.random.number({min: 100, max: 1000});
         // Generamos una fecha aleatoria entre hoy y dentro de 1 mes, le asignamos una hora y unos minutos aleatorios de los arrays
-        let date = moment(moment(), moment().add(1, 'month'))
+        let date = moment(faker.date.between(moment(), moment().add(1, 'month')))
             .set({
                 hour: faker.random.arrayElement(hours),
                 minutes: faker.random.arrayElement(minutes),
