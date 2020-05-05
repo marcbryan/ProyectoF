@@ -6,14 +6,31 @@ import { RegisterPage } from './register/register.page';
 import { MyTicketsPage } from './my-tickets/my-tickets.page';
 
 import { AuthGuard } from './services/auth/auth.guard';
+import { AnonymousLayoutComponent } from './components/anonymous-layout.component';
+import { AuthenticatedLayoutComponent } from './components/authenticated-layout.component';
 
 const routes: Routes = [
-  // De momento el path / redirige a /login
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
   // Rutas app
-  { path: 'login', component: LoginPage, data: {title: 'Login'} },
-  { path: 'crear-cuenta', component: RegisterPage, data: {title: 'Crear cuenta'} },
-  { path: 'mis-entradas', component: MyTicketsPage, data: {title: 'Mis entradas'}, canActivate: [AuthGuard] },
+  {
+    path: '',
+    component: AnonymousLayoutComponent,
+    children: [
+      // De momento el path / redirige a /login
+      { path: '', redirectTo: '/login', pathMatch: 'full' },
+      { path: 'login', component: LoginPage, data: {title: 'Login'} },
+      { path: 'crear-cuenta', component: RegisterPage, data: {title: 'Crear cuenta'} }
+    ]
+  },
+  {
+    path: '',
+    component: AuthenticatedLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'mis-entradas', component: MyTicketsPage, data: {title: 'Mis entradas'} },
+      // Si esta logeado y accede a una ruta que no existe, se redirige a /mis-entradas
+      { path: '**', redirectTo: 'mis-entradas' }
+    ]
+  },
   // De momento las rutas que no existen se redirigen a /login
   { path: '**', redirectTo: 'login' }
 ];

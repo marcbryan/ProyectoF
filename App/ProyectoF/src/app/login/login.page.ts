@@ -29,7 +29,11 @@ export class LoginPage implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit() { 
+    if (this.authService.isLoggedIn) {
+      this.router.navigate(['/mis-entradas']);
+    }
+  }
 
   login() {
     if (this.loginForm.valid) {

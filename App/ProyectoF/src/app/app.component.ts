@@ -21,8 +21,8 @@ export class AppComponent implements OnInit {
       )
       .subscribe((event) => {
           // Asignar titulo pantalla
-          const title = this.getTitle(this.router.routerState, this.router.routerState.root).join(' | ');
-          this.titleService.setTitle(this.title + ' - ' + title);
+          const pageTitle = this.getTitle(this.router.routerState, this.router.routerState.root).join(' | ');
+          this.titleService.setTitle(pageTitle + ' - ' + this.title);         
         }
       );
   }

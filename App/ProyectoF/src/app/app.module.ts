@@ -5,6 +5,9 @@ import { AuthGuard } from './services/auth/auth.guard';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AnonymousLayoutComponent } from './components/anonymous-layout.component';
+import { AuthenticatedLayoutComponent } from './components/authenticated-layout.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { LoginPage } from './login/login.page';
 import { RegisterPage } from './register/register.page';
 import { MyTicketsPage } from './my-tickets/my-tickets.page';
@@ -13,6 +16,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NumericDirective } from './numeric.directive';
 
@@ -20,6 +27,9 @@ import { NumericDirective } from './numeric.directive';
 @NgModule({
   declarations: [
     AppComponent,
+    AnonymousLayoutComponent,
+    AuthenticatedLayoutComponent,
+    ToolbarComponent,
     LoginPage,
     RegisterPage,
     MyTicketsPage,
@@ -34,6 +44,10 @@ import { NumericDirective } from './numeric.directive';
     MatInputModule,
     MatButtonModule,
     MatSnackBarModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
     AppRoutingModule,
     BrowserAnimationsModule
   ],
