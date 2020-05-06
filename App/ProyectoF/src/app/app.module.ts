@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AnonymousLayoutComponent } from './components/anonymous-layout.component';
 import { AuthenticatedLayoutComponent } from './components/authenticated-layout.component';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { ToolbarComponent, ConfirmDialog } from './components/toolbar/toolbar.component';
 import { LoginPage } from './login/login.page';
 import { RegisterPage } from './register/register.page';
 import { MyTicketsPage } from './my-tickets/my-tickets.page';
@@ -20,6 +20,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NumericDirective } from './numeric.directive';
 
@@ -30,6 +33,7 @@ import { NumericDirective } from './numeric.directive';
     AnonymousLayoutComponent,
     AuthenticatedLayoutComponent,
     ToolbarComponent,
+    ConfirmDialog,
     LoginPage,
     RegisterPage,
     MyTicketsPage,
@@ -48,10 +52,14 @@ import { NumericDirective } from './numeric.directive';
     MatIconModule,
     MatSidenavModule,
     MatListModule,
+    MatTooltipModule,
+    MatDialogModule,
+    MatCardModule,
     AppRoutingModule,
     BrowserAnimationsModule
   ],
   providers: [Title, AuthGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ConfirmDialog]
 })
 export class AppModule { }

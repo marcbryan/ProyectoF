@@ -39,6 +39,11 @@ export class AuthService {
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
   }
 
+  logout() {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('expires_at');
+  }
+
   /**
    * Comprueba si el usuario esta logeado mediante un token acceso
    * @return {boolean} true si está logeado, false si no lo está

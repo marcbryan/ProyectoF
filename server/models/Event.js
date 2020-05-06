@@ -22,6 +22,8 @@ EventSchema.methods.toJSON = function() {
     var obj = this.toObject();
     obj.starts = this.str_starts;
     obj.ends = this.str_ends;
+    obj.date = moment(this.starts).format('DD/MM/YYYY');
+    obj.schedule = moment(this.starts).format('HH:mm')+' - '+moment(this.ends).format('HH:mm');
     return obj;
 }
 
