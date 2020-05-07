@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-toolbar',
@@ -9,16 +10,21 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent implements OnInit {
-  title: string
+  title: string = '';
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private toolbarTitleService: ToolbarTitleService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.toolbarTitleService.title.subscribe(updatedTitle => {
+      this.title = updatedTitle;
+    });
+  }
 
   openDialog(): void {
     this.dialog.open(ConfirmDialog, { width: '400px', height: '150px' });
   }
 }
+
 
 @Component({
   selector: 'confirm-dialog',
@@ -39,5 +45,17 @@ export class ConfirmDialog {
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+}
+
+
+@Injectable()
+export class ToolbarTitleService {
+  title = new BehaviorSubject('');
+
+  constructor() {}
+
+  setTitle(title: string) {
+    this.title.next(title);
   }
 }

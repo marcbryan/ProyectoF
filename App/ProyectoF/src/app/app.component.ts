@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
+import { ToolbarTitleService } from './components/toolbar/toolbar.component';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import { filter, map } from 'rxjs/operators';
 export class AppComponent implements OnInit {
   title = 'ProyectoF';
 
-  public constructor(private router: Router, private titleService: Title) { }
+  public constructor(private router: Router, private titleService: Title, private toolbarTitleService: ToolbarTitleService) { }
 
   ngOnInit() {
     this.router.events
@@ -22,7 +23,9 @@ export class AppComponent implements OnInit {
       .subscribe((event) => {
           // Asignar titulo pantalla
           const pageTitle = this.getTitle(this.router.routerState, this.router.routerState.root).join(' | ');
-          this.titleService.setTitle(pageTitle + ' - ' + this.title);         
+          this.titleService.setTitle(pageTitle + ' - ' + this.title);
+          // Asignar titulo al toolbar
+          this.toolbarTitleService.setTitle(pageTitle);
         }
       );
   }

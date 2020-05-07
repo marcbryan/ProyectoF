@@ -7,10 +7,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AnonymousLayoutComponent } from './components/anonymous-layout.component';
 import { AuthenticatedLayoutComponent } from './components/authenticated-layout.component';
-import { ToolbarComponent, ConfirmDialog } from './components/toolbar/toolbar.component';
+import { ToolbarComponent, ConfirmDialog, ToolbarTitleService } from './components/toolbar/toolbar.component';
 import { LoginPage } from './login/login.page';
 import { RegisterPage } from './register/register.page';
 import { MyTicketsPage } from './my-tickets/my-tickets.page';
+import { EventsAvailablePage } from './events-available/events-available.page';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -37,6 +38,7 @@ import { NumericDirective } from './numeric.directive';
     LoginPage,
     RegisterPage,
     MyTicketsPage,
+    EventsAvailablePage,
     NumericDirective
   ],
   imports: [
@@ -58,7 +60,7 @@ import { NumericDirective } from './numeric.directive';
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [Title, AuthGuard],
+  providers: [Title, AuthGuard, ToolbarTitleService],
   bootstrap: [AppComponent],
   entryComponents: [ConfirmDialog]
 })

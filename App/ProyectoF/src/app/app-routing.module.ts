@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginPage } from './login/login.page';
 import { RegisterPage } from './register/register.page';
 import { MyTicketsPage } from './my-tickets/my-tickets.page';
+import { EventsAvailablePage } from './events-available/events-available.page';
 
 import { AuthGuard } from './services/auth/auth.guard';
 import { AnonymousLayoutComponent } from './components/anonymous-layout.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'mis-entradas', component: MyTicketsPage, data: {title: 'Mis entradas'} },
+      { path: 'eventos-disponibles', component: EventsAvailablePage, data: {title: 'Eventos disponibles'} },
       // Si esta logeado y accede a una ruta que no existe, se redirige a /mis-entradas
       { path: '**', redirectTo: 'mis-entradas' }
     ]
