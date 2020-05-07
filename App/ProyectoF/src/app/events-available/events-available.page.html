@@ -1,5 +1,5 @@
-<ul>
+<ul class="events-list">
     <li *ngFor="let ev of events | async">
-        <p>{{ev.name}}</p>
+        <event-card [event]="ev"></event-card>
     </li>
 </ul>

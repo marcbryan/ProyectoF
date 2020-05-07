@@ -1,0 +1,18 @@
+.event-card { padding: 10px 25px 20px 25px; margin-bottom: 20px; background: white; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); }
+.event-card h1 { font-weight: bold; }
+.event-card .header { display: flex; flex-direction: row; justify-content: space-between; }
+.event-card mat-icon { font-size: 32px; height: 32px; width: 32px; cursor: pointer; margin-right: -4px;}
+.event-card .card-container { display: flex; flex-direction: row; }
+.event-card img { width: 250px; height: 175px; }
+.event-card div.description { font-size: 18px; margin-left: 20px; }
+.event-card h2 { margin: 0; font-weight: bold; text-align: right;}
+
+@media (max-width: 599px) {
+    .event-card .card-container { flex-direction: column; }
+    .event-card div.description { margin: 10px 0; }
+    .event-card h2 { text-align: left; }
+}
+
+@media (max-width: 350px) {
+    .event-card img { width: 100%; height: auto; }
+}

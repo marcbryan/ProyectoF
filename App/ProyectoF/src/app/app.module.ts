@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { AnonymousLayoutComponent } from './components/anonymous-layout.component';
 import { AuthenticatedLayoutComponent } from './components/authenticated-layout.component';
 import { ToolbarComponent, ConfirmDialog, ToolbarTitleService } from './components/toolbar/toolbar.component';
+import { EventCardComponent } from './components/event-card/event-card.component';
 import { LoginPage } from './login/login.page';
 import { RegisterPage } from './register/register.page';
 import { MyTicketsPage } from './my-tickets/my-tickets.page';
@@ -34,6 +35,7 @@ import { NumericDirective } from './numeric.directive';
     AnonymousLayoutComponent,
     AuthenticatedLayoutComponent,
     ToolbarComponent,
+    EventCardComponent,
     ConfirmDialog,
     LoginPage,
     RegisterPage,
