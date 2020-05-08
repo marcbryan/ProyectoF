@@ -21,6 +21,7 @@ const mongoose = require('mongoose');
 mongoose.connect(URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
     user: process.env.DBUSER,
     pass: process.env.DBPASS
 });

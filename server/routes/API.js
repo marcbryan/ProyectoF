@@ -21,5 +21,8 @@ router.post('/user/update', user_controller.user_update_post);
 // GET request -> obtener eventos disponibles
 router.get('/events', event_controller.getEvents);
 
+// POST request -> comprar entradas
+router.post('/tickets/buy', event_controller.buyTickets);
+
 
 module.exports = router;

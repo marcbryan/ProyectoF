@@ -13,7 +13,12 @@ var UserSchema = new Schema({
     phone: {type: String, required: true},
     profileImg_URL: {type: String, default: 'default'},
     credit_card: Map,
-    tickets: Array,
+    tickets: [{
+        _id: false,
+        event_id: String,
+        qty: Number,
+        bought_at: Date
+    }],
     friends: Array,
     google_token: String,
     fb_token: String
@@ -31,7 +36,6 @@ var UserSchema = new Schema({
 UserSchema.methods.toJSON = function() {
     var obj = this.toObject();
     obj.createdAt = this.str_createdAt;
-    delete obj._id;
     delete obj.password;
     return obj;
 }

@@ -1,5 +1,10 @@
 var Event = require('../models/Event');
+var User = require('../models/User');
 
+/**
+ * Obtiene todos los eventos los cuales su fecha de inicio sea posterior a hoy,
+ * para ser exactos todos los posteriores al momento de realizar la petición (GET)
+ */
 exports.getEvents = function(req, res) {
     Event.find({
         starts: {$gt: new Date()}
@@ -16,7 +21,52 @@ exports.getEvents = function(req, res) {
     });
 }
 
+/**
+ * Se encarga de gestionar las compras de entradas (POST)
+ */
+exports.buyTickets = function(req, res) {
+    let event_id = req.body.event_id;
+    let qty = parseInt(req.body.qty);
+    let uid = req.body.uid;
+    // Log para ver datos en la consola
+    console.log('[INFO] Buy tickets REQ at '+new Date()+' -> { event_id: "'+event_id+'", qty: "'+qty+'", uid: "'+uid+'" }');
+
+    if (isset(event_id) && (isset(qty) && !isNaN(qty)) && isset(uid)) {
+        Event.updateOne({_id: event_id, tickets_available: {$gte: 0}}, { $inc: { tickets_available: -qty } }, function(err, raw) {
+            if (err) {
+                onErrorQuery();
+                return;
+            }
+            if (raw.nModified < 1) {
+                res.status(403).send({status: 'ERROR', msg: 'Error al comprar las entradas'});
+                return;
+            }
+            let ticket = { event_id: event_id, qty: qty, bought_at: new Date()};
+            User.updateOne({_id: uid}, { $push: { tickets: ticket} }, function(err, raw) {
+                if (err) {
+                    onErrorQuery();
+                    return;
+                }
+                if (raw.nModified < 1) {
+                    res.status(403).send({status: 'ERROR', msg: 'Error al comprar las entradas'});
+                    return;
+                }         
+                res.send({status: 'OK', msg: qty+' entradas compradas correctamente', ticket: ticket});
+            });
+        });
+    } else {
+        res.status(403).send({status: 'ERROR', msg: 'Faltan datos o hay un error, vuelve a intentarlo'});
+    }
+}
+
 function onErrorQuery() {
     console.log(err);
     res.status(403).send({status: 'ERROR', msg: 'Error de base de datos, intentalo más tarde.'});
+}
+
+function isset(value) {
+    if (value !== undefined && value != null && value != '') {
+        return true;
+    }
+    return false;
 }

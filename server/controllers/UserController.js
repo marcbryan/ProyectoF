@@ -11,7 +11,7 @@ exports.user_login = function (req, res) {
     console.log('[INFO] Login REQ at '+new Date()+' -> { email: "'+email+'", pass: "'+pass+'" }');
     
     if (isset(email) && isset(pass)) {
-        User.findOne({email: email, password: pass}, '-_id -__v -credit_card', function(err, document) {
+        User.findOne({email: email, password: pass}, '-__v -credit_card', function(err, document) {
             if (err) {
                 onErrorQuery();
                 return;
