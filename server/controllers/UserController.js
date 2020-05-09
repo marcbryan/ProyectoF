@@ -86,12 +86,116 @@ exports.user_create_post = function(req, res) {
     }
 }
 
-/** Se encarga de actualizar datos de un usuario por POST */
+/** 
+ * Se encarga de actualizar datos de un usuario por POST.
+ * Si se actualiza el número de móvil, se comprobará que no exista.
+ * Si se actualiza la contraseña, se verificará que la contraseña antigua
+ * enviada concuerda con la de la base de datos.
+ */
 exports.user_update_post = function(req, res) {
-    res.send('UPDATE No implementado');
+    console.log('[INFO] User update REQ at '+new Date());
+    let uid = req.body.uid;
+    if (isset(uid)) {
+        var oldPassword = req.body.oldPassword, newPassword = req.body.newPassword;
+        var updatePhone = false, onlyPhoneOrPwd = true, empty = true, update = {}, errors = [];
+        const fields = ['name', 'last_name', 'city', 'zipcode', 'phone'];
+        fields.forEach(field => {
+            if (isset(req.body[field])) {
+                if (field == 'phone') {
+                    updatePhone = true;
+                } else {
+                    onlyPhoneOrPwd = false;
+                }
+                update[field] = req.body[field];
+                empty = false;
+            }
+        });
+
+        var updatePassword = isset(oldPassword) && isset(newPassword);
+
+        if (empty && !updatePassword) {
+            res.status(403).send({status: 'ERROR', msg: 'Hacen falta datos para poder actualizar tu usuario'});
+            return;
+        }
+
+        if (updatePhone) {
+            User.find({phone: req.body.phone}, 'phone', {limit: 1}, function(err, docs) {
+                if (err) {
+                    onErrorQuery();
+                    return;
+                }
+                if (docs.length > 0) {
+                    errors.push('El número de móvil no ha sido actualizado, ya existe');
+                    delete update.phone;
+                }
+                if (updatePassword) {
+                    User.findById({_id: uid}, callback_update_password);
+                } else {
+                    User.updateOne({_id: uid}, update, callback_update);
+                }
+            });
+        } else {
+            if (updatePassword) {
+                User.findById({_id: uid}, callback_update_password);
+            } else {
+                User.updateOne({_id: uid}, update, callback_update);
+            }
+        }
+    } else {
+        res.status(403).send({status: 'ERROR', msg: 'Hace falta un identificador para poder actualizar un usuario. Vuelve a intentarlo'});
+    }
+
+
+    // Callbacks
+    function callback_update_password(err, doc) {
+        if (err) {
+            onErrorQuery();
+            return;
+        }
+        if (doc) {
+            let hash = User.hashPassword(oldPassword);
+            if (hash == doc.password) {
+                update.password = User.hashPassword(newPassword);
+            } else {
+                errors.push('La contraseña antigua no es correcta, no se ha podido actualizar la contraseña');
+            }
+            User.updateOne({_id: uid}, update, callback_update);
+        }
+    }
+
+    function callback_update(err, raw) {
+        if (err) {
+            onErrorQuery();
+            return;
+        }
+        if (raw.nModified < 1) {
+            let msg = 'Ha habido un error al actualizar los datos de tu usuario';
+            if (errors.length > 0) {
+                res.status(403).send({status: 'ERROR', msg: msg, errors: errors});
+            } else {
+                res.status(403).send({status: 'ERROR', msg: msg});
+            }
+            return;
+        }
+        let msg = 'Se han actualizado los datos del usuario correctamente';
+        if (onlyPhoneOrPwd && (updatePhone != updatePassword)) {
+            if (errors.length > 0) {
+                res.status(403).send({status: 'ERROR', msg: errors[0]});
+            } else {
+                res.send({status: 'OK', msg: msg});
+            }
+        } else {
+            if (errors.length > 0) {
+                res.send({status: 'P', msg: 'Se han actualizado parcialmente los datos del usuario', errors: errors});
+            } else {
+                res.send({status: 'OK', msg: msg});
+            }
+        }
+    }
 }
 
 
+// Funciones
 function isset(value) {
     if (value !== undefined && value != null && value != '') {
         return true;
