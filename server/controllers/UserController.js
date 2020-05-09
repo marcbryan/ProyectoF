@@ -13,7 +13,7 @@ exports.user_login = function (req, res) {
     if (isset(email) && isset(pass)) {
         User.findOne({email: email, password: pass}, '-__v -credit_card', function(err, document) {
             if (err) {
-                onErrorQuery();
+                onErrorQuery(err, res);
                 return;
             }
             if (isset(document)) {
@@ -44,7 +44,7 @@ exports.user_create_post = function(req, res) {
                 $and: [ {$or: [{email: req.body.email}, {phone: req.body.phone}]} ]
             }, 'email phone', function(err, results) {
                 if (err) {
-                    onErrorQuery();
+                    onErrorQuery(err, res);
                     return;
                 }
                 if (results.length == 0) {
@@ -53,7 +53,7 @@ exports.user_create_post = function(req, res) {
                     console.log(newUser);
                     newUser.save(function (err) {
                         if (err) {
-                            onErrorQuery();
+                            onErrorQuery(err, res);
                             return;
                         }
                         res.send({status: 'OK', msg: 'Cuenta creada correctamente'});
@@ -121,7 +121,7 @@ exports.user_update_post = function(req, res) {
         if (updatePhone) {
             User.find({phone: req.body.phone}, 'phone', {limit: 1}, function(err, docs) {
                 if (err) {
-                    onErrorQuery();
+                    onErrorQuery(err, res);
                     return;
                 }
                 if (docs.length > 0) {
@@ -149,7 +149,7 @@ exports.user_update_post = function(req, res) {
     // Callbacks
     function callback_update_password(err, doc) {
         if (err) {
-            onErrorQuery();
+            onErrorQuery(err, res);
             return;
         }
         if (doc) {
@@ -165,7 +165,7 @@ exports.user_update_post = function(req, res) {
 
     function callback_update(err, raw) {
         if (err) {
-            onErrorQuery();
+            onErrorQuery(err, res);
             return;
         }
         if (raw.nModified < 1) {
@@ -203,7 +203,7 @@ function isset(value) {
     return false;
 }
 
-function onErrorQuery() {
+function onErrorQuery(err, res) {
     console.log(err);
     res.status(403).send({status: 'ERROR', msg: 'Error de base de datos, intentalo más tarde.'});
 }
