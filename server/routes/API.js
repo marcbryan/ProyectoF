@@ -16,6 +16,9 @@ router.post('/user/create', user_controller.user_create_post);
 // POST request -> actualizar datos usuario
 router.post('/user/update', user_controller.user_update_post);
 
+// POST request -> añadir/eliminar evento favorito
+router.post('/user/fav-event', user_controller.user_favourite_events);
+
 // --- API Events ---
 
 // GET request -> obtener eventos disponibles
@@ -24,5 +27,7 @@ router.get('/events', event_controller.getEvents);
 // POST request -> comprar entradas
 router.post('/tickets/buy', event_controller.buyTickets);
 
+// GET request -> obtener eventos favoritos del usuario
+router.get('/events/fav', event_controller.getFavEvents);
 
 module.exports = router;

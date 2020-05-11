@@ -194,6 +194,43 @@ exports.user_update_post = function(req, res) {
     }
 }
 
+/**
+ * Se encarga de añadir/eliminar un evento de los favoritos del usuario
+ */
+exports.user_favourite_events = function(req, res) {
+    let uid = req.body.uid, event_id = req.body.event_id, fav = req.body.fav;
+    if (isset(uid) && isset(event_id) && isset(fav)) {
+        fav = !!JSON.parse(String(fav).toLowerCase());
+        if (fav == true || !fav) {
+            let options = { $pull: { fav_events: event_id} };
+            if (fav == true) {
+                options = { $addToSet: { fav_events: event_id} };
+            }
+            User.updateOne({_id: uid}, options, function(err, raw) {
+                if (err) {
+                    onErrorQuery(err, res);
+                    return;
+                }
+                if (raw.nModified < 1) {
+                    res.status(403).send({status: 'ERROR', msg: 'Ha habido un error al añadir/eliminar el evento a favoritos'});
+                    return;
+                }
+                let msg = '';
+                if (!fav) {
+                    msg = 'Eliminado de favoritos';
+                } else {
+                    msg = 'Añadido a favoritos';
+                }
+                res.send({status: 'OK', msg: msg});
+            });
+        } else {
+            res.status(403).send({status: 'ERROR', msg: 'Formato incorrecto, no se puede actualizar'});
+        }
+    } else {
+        res.status(403).send({status: 'ERROR', msg: 'Faltan datos para poder añadir/eliminar el evento a favoritos'});
+    }
+}
+
 
 // Funciones
 function isset(value) {

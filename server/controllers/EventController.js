@@ -71,6 +71,45 @@ exports.buyTickets = function(req, res) {
     }
 }
 
+/**
+ * Obtiene los eventos favoritos de un usuario
+ */
+exports.getFavEvents = function(req, res) {
+    let uid = req.body.uid;
+    if (isset(uid)) {
+        User.findOne({_id: uid}, 'fav_events', function(err, doc) {
+            if (err) {
+                onErrorQuery(err, res);
+                return;
+            }
+            if (doc) {
+                if (doc.fav_events.length > 0) {
+                    Event.find({
+                        _id: {$in: doc.fav_events}
+                    }, '-__v', function(err, results) {
+                        if (err) {
+                            onErrorQuery(err, res);
+                            return;
+                        }
+                        let events = [];
+                        results.forEach(doc => {
+                            events.push(new Event(doc).toJSON());
+                        });
+                        res.send({status: 'OK', data: events});
+                    });
+                } else {
+                    res.send({status: 'OK', msg: 'No hay eventos en favoritos', data: []});
+                }
+            } else {
+                res.status(403).send({status: 'ERROR', msg: 'Ha habido un error al obtener los eventos favoritos'});
+            }
+        });
+    } else {
+        res.status(403).send({status: 'ERROR', msg: 'Ha habido un error al obtener los eventos favoritos'});
+    }
+}
+
+
 function onErrorQuery(err, res) {
     console.log(err);
     res.status(403).send({status: 'ERROR', msg: 'Error de base de datos, intentalo más tarde.'});

@@ -20,6 +20,7 @@ var UserSchema = new Schema({
         bought_at: Date
     }],
     friends: Array,
+    fav_events: {type: Array, default: []},
     google_token: String,
     fb_token: String
 }, {
