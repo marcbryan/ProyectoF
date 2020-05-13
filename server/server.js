@@ -3,12 +3,20 @@ const cors = require('cors');
 const app = express();
 require('dotenv').config();
 
+app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors());
+// Para que se pueda acceder a la carpeta public
+app.use(express.static('public'));
 
 var apiRouter = require('./routes/API');
 app.use('/api', apiRouter);
+
+// Documentación
+app.get('/', function(req, res) {
+  res.render('api-docs');
+});
 
 // Variables entorno
 const PORT = process.env.PORT || 3000;
