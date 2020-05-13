@@ -15,6 +15,7 @@ var UserSchema = new Schema({
     credit_card: Map,
     tickets: [{
         _id: false,
+        ticket_code: { type: String, default: ''},
         event_id: String,
         qty: Number,
         bought_at: Date
@@ -37,6 +38,9 @@ var UserSchema = new Schema({
 UserSchema.methods.toJSON = function() {
     var obj = this.toObject();
     obj.createdAt = this.str_createdAt;
+    obj.tickets.forEach(ticket => {
+        ticket.bought_at = moment(ticket.bought_at).format('DD/MM/YYYY HH:mm:ss')
+    });
     delete obj.password;
     return obj;
 }

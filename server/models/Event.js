@@ -27,6 +27,10 @@ EventSchema.methods.toJSON = function() {
     return obj;
 }
 
+EventSchema.statics.formatDate = function(date) {
+    return moment(date).format('DD/MM/YYYY HH:mm:ss');
+}
+
 EventSchema.virtual('str_starts')
     .get(function() {
         return moment(this.starts).format('DD/MM/YYYY HH:mm:ss');

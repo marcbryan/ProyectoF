@@ -64,9 +64,11 @@ exports.buyTickets = function(req, res) {
             res.status(403).send({status: 'ERROR', msg: 'Error al comprar las entradas'});
             return;
         }
-        let ticket = { event_id: event_id, qty: qty, bought_at: new Date()};
+        let code = 'PF-'+parseInt(Date.now() + Math.random());
+        let ticket = { ticket_code: code, event_id: event_id, qty: qty, bought_at: new Date()};
         user.tickets.push(ticket);
         user.save();
+        ticket.bought_at = Event.formatDate(ticket.bought_at);
         res.send({status: 'OK', msg: qty+' entradas compradas correctamente', ticket: ticket});
     }
 }
