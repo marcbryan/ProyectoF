@@ -25,6 +25,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NumericDirective } from './numeric.directive';
 
@@ -59,6 +62,9 @@ import { NumericDirective } from './numeric.directive';
     MatTooltipModule,
     MatDialogModule,
     MatCardModule,
+    MatProgressBarModule,
+    LoadingBarModule,
+    LoadingBarHttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule
   ],

@@ -43,6 +43,7 @@ export class ConfirmDialog {
   }
 
   logout() {
+    this.closeDialog();
     this.authService.logout();
     this.router.navigate(['/login']);
   }

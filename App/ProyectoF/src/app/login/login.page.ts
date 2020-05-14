@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginPage implements OnInit {
     public builder: FormBuilder,
     public snackBar: MatSnackBar,
     public authService: AuthService,
-    public router: Router
+    public router: Router,
+    private loadingBar: LoadingBarService
   ) {
     // Agrupar email y password en un FormGroup
     this.loginForm = this.builder.group({
@@ -37,12 +39,15 @@ export class LoginPage implements OnInit {
 
   login() {
     if (this.loginForm.valid) {
+      this.loadingBar.start();
       this.authService.signIn(this.loginForm.value).subscribe((res: any) => {
         this.authService.setSession(res.session);
         this.authService.currentUser = res.data;
+        this.loadingBar.complete();
         this.router.navigate(['/mis-entradas']);
         this.snackBar.open(res.msg, 'Aceptar', {duration: 2000});
       }, (error: any) => {        
+        this.loadingBar.complete();
         this.snackBar.open(error.error.msg, 'Aceptar', {duration: 2000});
       });
     }
