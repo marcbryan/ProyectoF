@@ -231,6 +231,42 @@ exports.user_favourite_events = function(req, res) {
     }
 }
 
+/**
+ * Se encarga de añadir a un amigo si la dirección de correo del amigo existe
+ */
+exports.user_add_friend = function(req, res) {
+    let uid = req.body.uid, email = req.body.email;
+    console.log('[INFO] Add friend REQ at '+new Date()+' { uid:'+uid+', friend: '+email+' }');
+    
+    if (isset(uid) && isset(email)) {
+        User.findOne({email: email}, function(err, doc) {
+            if (err) {
+                onErrorQuery(err, res);
+                return;
+            }
+            if (!doc) {
+                res.status(403).send({status: 'ERROR', msg: 'No hay ningún usuario con este correo electrónico'});
+            } else {
+                let friend = new User(doc);
+                User.findOneAndUpdate({_id: uid}, { $addToSet: {friends: email} }, {new: true}, function(err, doc) {
+                    if (err) {
+                        onErrorQuery(err, res);
+                        return;
+                    }
+                    if (doc) {
+                        friend.friends.push(doc.email);
+                        friend.save();
+                        res.send({status: 'OK', msg: email+' añadido como amigo!'});
+                    } else {
+                        res.status(403).send({status: 'ERROR', msg: 'Error al añadir amigo'});
+                    }
+                });
+                
+            }
+        });
+    }
+}
+
 
 // Funciones
 function isset(value) {

@@ -19,6 +19,9 @@ router.post('/user/update', user_controller.user_update_post);
 // POST request -> añadir/eliminar evento favorito
 router.post('/user/fav-event', user_controller.user_favourite_events);
 
+// POST request -> añadir amigos
+router.post('/user/add', user_controller.user_add_friend);
+
 // --- API Events ---
 
 // GET request -> obtener eventos disponibles
