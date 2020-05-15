@@ -2,17 +2,23 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './services/auth/auth.guard';
+import { AuthBusinessGuard } from './services/auth-business/auth-business.guard';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AnonymousLayoutComponent } from './components/anonymous-layout.component';
 import { AuthenticatedLayoutComponent } from './components/authenticated-layout.component';
-import { ToolbarComponent, ConfirmDialog, ToolbarTitleService } from './components/toolbar/toolbar.component';
+import { AuthenticatedBusinessLayoutComponent } from './components/authenticated-business-user-layout.component';
+import { ToolbarComponent, ConfirmDialog } from './components/toolbar/toolbar.component';
+import { BusinessToolbarComponent, LogoutDialog } from './components/business-toolbar/business-toolbar.component';
 import { EventCardComponent } from './components/event-card/event-card.component';
 import { LoginPage } from './login/login.page';
 import { RegisterPage } from './register/register.page';
 import { MyTicketsPage } from './my-tickets/my-tickets.page';
 import { EventsAvailablePage } from './events-available/events-available.page';
+import { BusinessLoginPage } from './business-login/business-login.page';
+import { BusinessEventsPage } from './business-events/business-events.page';
+import { ToolbarTitleService } from './services/toolbar-title/toolbar-title.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -37,13 +43,18 @@ import { NumericDirective } from './numeric.directive';
     AppComponent,
     AnonymousLayoutComponent,
     AuthenticatedLayoutComponent,
+    AuthenticatedBusinessLayoutComponent,
+    BusinessToolbarComponent,
     ToolbarComponent,
     EventCardComponent,
     ConfirmDialog,
+    LogoutDialog,
     LoginPage,
     RegisterPage,
     MyTicketsPage,
     EventsAvailablePage,
+    BusinessLoginPage,
+    BusinessEventsPage,
     NumericDirective
   ],
   imports: [
@@ -68,8 +79,8 @@ import { NumericDirective } from './numeric.directive';
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [Title, AuthGuard, ToolbarTitleService],
+  providers: [Title, AuthGuard, AuthBusinessGuard, ToolbarTitleService],
   bootstrap: [AppComponent],
-  entryComponents: [ConfirmDialog]
+  entryComponents: [ConfirmDialog, LogoutDialog]
 })
 export class AppModule { }

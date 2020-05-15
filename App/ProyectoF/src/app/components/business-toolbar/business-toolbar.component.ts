@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { AuthBusinessService } from 'src/app/services/auth-business/auth-business.service';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ToolbarTitleService } from 'src/app/services/toolbar-title/toolbar-title.service';
 
 @Component({
-  selector: 'app-toolbar',
-  templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.css']
+  selector: 'app-business-toolbar',
+  templateUrl: './business-toolbar.component.html',
+  styleUrls: ['./business-toolbar.component.css']
 })
-export class ToolbarComponent implements OnInit {
+export class BusinessToolbarComponent implements OnInit {
   title: string = '';
 
-  constructor(public dialog: MatDialog, private toolbarTitleService: ToolbarTitleService) { }
+  constructor(public dialog: MatDialog, private toolbarTitleService: ToolbarTitleService) {}
 
   ngOnInit(): void {
     this.toolbarTitleService.title.subscribe(updatedTitle => {
@@ -21,13 +21,14 @@ export class ToolbarComponent implements OnInit {
   }
 
   openDialog(): void {
-    this.dialog.open(ConfirmDialog, { width: '400px', height: '150px' });
+    this.dialog.open(LogoutDialog, { width: '400px', height: '150px' });
   }
+
 }
 
 
 @Component({
-  selector: 'confirm-dialog',
+  selector: 'logout-dialog',
   template: ` <h1 mat-dialog-title>¿Desea cerrar la sesión?</h1>
               <div mat-dialog-content></div>
               <div mat-dialog-actions>
@@ -35,8 +36,8 @@ export class ToolbarComponent implements OnInit {
                 <button mat-button (click)="logout()">Aceptar</button>
               </div>`
 })
-export class ConfirmDialog {
-  constructor(private authService: AuthService, private router: Router, public dialogRef: MatDialogRef<ConfirmDialog>) { }
+export class LogoutDialog {
+  constructor(private authService: AuthBusinessService, private router: Router, public dialogRef: MatDialogRef<LogoutDialog>) { }
 
   closeDialog() {
     this.dialogRef.close();
@@ -45,6 +46,6 @@ export class ConfirmDialog {
   logout() {
     this.closeDialog();
     this.authService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/negocios/login']);
   }
 }

@@ -4,6 +4,7 @@ var router = express.Router();
 // Imports de los controladores
 var user_controller = require('../controllers/UserController');
 var event_controller = require('../controllers/EventController');
+var business_user_controller = require('../controllers/BusinessUserController')
 
 // --- API User ---
 
@@ -32,5 +33,10 @@ router.post('/tickets/buy', event_controller.buyTickets);
 
 // GET request -> obtener eventos favoritos del usuario
 router.get('/events/fav', event_controller.getFavEvents);
+
+// --- API Business User ---
+
+// POST request -> login
+router.post('/business/login', business_user_controller.business_user_login);
 
 module.exports = router;

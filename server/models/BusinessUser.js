@@ -7,11 +7,12 @@ var BusinessUserSchema = new Schema({
     name: {type: String, required: true},
     last_name: {type: String, required: true},
     email: {type: String, required: true},
-    password: {type: String, required: true, select: false},
+    password: {type: String, required: true},
     role: {type: String, required: true, default: 'user'},
     phone: {type: String, required: true},
     business_id: String,
     profileImg_URL: {type: String, default: 'default'},
+    access_token: String,
     has2FA: {type: Boolean, default: false}
 }, {
     // Añade el timestamp createdAt y no añade updatedAt
@@ -27,7 +28,6 @@ var BusinessUserSchema = new Schema({
 BusinessUserSchema.methods.toJSON = function() {
     var obj = this.toObject();
     obj.createdAt = this.str_createdAt;
-    delete obj._id;
     delete obj.password;
     return obj;
 }

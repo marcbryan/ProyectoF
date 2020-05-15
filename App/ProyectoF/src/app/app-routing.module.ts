@@ -7,8 +7,12 @@ import { MyTicketsPage } from './my-tickets/my-tickets.page';
 import { EventsAvailablePage } from './events-available/events-available.page';
 
 import { AuthGuard } from './services/auth/auth.guard';
+import { AuthBusinessGuard } from './services/auth-business/auth-business.guard';
 import { AnonymousLayoutComponent } from './components/anonymous-layout.component';
 import { AuthenticatedLayoutComponent } from './components/authenticated-layout.component';
+import { AuthenticatedBusinessLayoutComponent } from './components/authenticated-business-user-layout.component';
+import { BusinessLoginPage } from './business-login/business-login.page';
+import { BusinessEventsPage } from './business-events/business-events.page';
 
 const routes: Routes = [
   // Rutas app
@@ -19,11 +23,22 @@ const routes: Routes = [
       // De momento el path / redirige a /login
       { path: '', redirectTo: '/login', pathMatch: 'full' },
       { path: 'login', component: LoginPage, data: {title: 'Login'} },
-      { path: 'crear-cuenta', component: RegisterPage, data: {title: 'Crear cuenta'} }
+      { path: 'crear-cuenta', component: RegisterPage, data: {title: 'Crear cuenta'} },
+      { path: 'negocios/login', component: BusinessLoginPage, data: {title: 'Login Negocios'}}
     ]
   },
   {
-    path: '',
+    path: 'negocios',
+    component: AuthenticatedBusinessLayoutComponent,
+    canActivate: [AuthBusinessGuard],
+    children: [
+      { path: 'eventos', component: BusinessEventsPage, data: {title: 'Nuestros eventos'} },
+      { path: '**', redirectTo: 'eventos' }
+    ],
+    
+  },
+  {
+    path: 'u',
     component: AuthenticatedLayoutComponent,
     canActivate: [AuthGuard],
     children: [

@@ -1,0 +1,9 @@
+mat-toolbar-row h1 { margin: 0 auto; }
+mat-toolbar mat-icon { font-size: 32px; height: 32px; width: 32px; line-height: 32px; }
+mat-sidenav { width: 250px; }
+mat-sidenav-content { height: calc(100vh - 64px); background: linear-gradient(180deg, #6A5A5A 0%, rgba(255, 255, 255, 0) 100%), #CF4444; }
+::ng-deep .mat-tooltip { font-size: 14px !important; }
+
+@media (max-width: 599px) {
+    mat-sidenav-content { height: calc(100vh - 56px); }
+}

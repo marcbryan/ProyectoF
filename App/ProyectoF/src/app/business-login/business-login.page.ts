@@ -1,17 +1,16 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Validators, FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthService } from '../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { LoadingBarService } from '@ngx-loading-bar/core';
+import { AuthBusinessService } from '../services/auth-business/auth-business.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.css'],
-  encapsulation: ViewEncapsulation.None
+  selector: 'app-business-login',
+  templateUrl: './business-login.page.html',
+  styleUrls: ['./business-login.page.css']
 })
-export class LoginPage implements OnInit {
+export class BusinessLoginPage implements OnInit {
   loginForm: FormGroup;
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required]);
@@ -20,7 +19,7 @@ export class LoginPage implements OnInit {
   constructor(
     public builder: FormBuilder,
     public snackBar: MatSnackBar,
-    public authService: AuthService,
+    public authService: AuthBusinessService,
     public router: Router,
     private loadingBar: LoadingBarService
   ) {
@@ -31,9 +30,9 @@ export class LoginPage implements OnInit {
     });
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     if (this.authService.isLoggedIn) {
-      this.router.navigate(['u/mis-entradas']);
+      this.router.navigate(['/negocios/mis-eventos']);
     }
   }
 
@@ -44,9 +43,9 @@ export class LoginPage implements OnInit {
         this.authService.setSession(res.session);
         this.authService.currentUser = res.data;
         this.loadingBar.complete();
-        this.router.navigate(['u/mis-entradas']);
+        this.router.navigate(['/negocios/mis-eventos']);
         this.snackBar.open(res.msg, 'Aceptar', {duration: 2000});
-      }, (error: any) => {        
+      }, (error: any) => {
         this.loadingBar.complete();
         this.snackBar.open(error.error.msg, 'Aceptar', {duration: 2000});
       });

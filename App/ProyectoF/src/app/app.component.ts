@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
-import { ToolbarTitleService } from './components/toolbar/toolbar.component';
+import { ToolbarTitleService } from './services/toolbar-title/toolbar-title.service';
 
 @Component({
   selector: 'app-root',
