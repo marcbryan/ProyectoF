@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Información del evento</h1>
+<div mat-dialog-content class="event-info">
+  <ul>
+    <li>Nombre del evento: {{event.name}}</li>
+    <li>Descripción: {{event.description}}</li>
+    <li>Precio: {{event.price}}€</li>
+    <li>Ubicación: {{event.location}}</li>
+    <li>Día: {{event.getDate(event.starts, 0)}}</li>
+    <li>El evento empieza a las {{event.getDate(event.starts, 1)}} y termina a las {{event.getDate(event.ends, 1)}}</li>
+  </ul>
+</div>

@@ -40,8 +40,8 @@ export class BusinessLoginPage implements OnInit {
     if (this.loginForm.valid) {
       this.loadingBar.start();
       this.authService.signIn(this.loginForm.value).subscribe((res: any) => {
-        this.authService.setSession(res.session);
         this.authService.currentUser = res.data;
+        this.authService.setSession(res.session);
         this.loadingBar.complete();
         this.router.navigate(['/negocios/mis-eventos']);
         this.snackBar.open(res.msg, 'Aceptar', {duration: 2000});

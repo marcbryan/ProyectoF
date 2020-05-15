@@ -28,17 +28,17 @@ EventSchema.methods.toJSON = function() {
 }
 
 EventSchema.statics.formatDate = function(date) {
-    return moment(date).format('DD/MM/YYYY HH:mm:ss');
+    return moment(date).format('DD/MM/YYYY HH:mm');
 }
 
 EventSchema.virtual('str_starts')
     .get(function() {
-        return moment(this.starts).format('DD/MM/YYYY HH:mm:ss');
+        return moment(this.starts).format('DD/MM/YYYY HH:mm');
     });
 
 EventSchema.virtual('str_ends')
     .get(function() {
-        return moment(this.ends).format('DD/MM/YYYY HH:mm:ss');
+        return moment(this.ends).format('DD/MM/YYYY HH:mm');
     });
 
 

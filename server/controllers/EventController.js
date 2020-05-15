@@ -22,6 +22,30 @@ exports.getEvents = function(req, res) {
 }
 
 /**
+ * Obtiene todos los eventos de un negocio pasando su ID (GET)
+ */
+exports.getEventsFromBusiness = function(req, res) {
+    let id = req.query.id;
+    if (isset(id)) {
+        Event.find({
+            business_id: id
+        }, '-__v', function(err, results) {
+            if (err) {
+                onErrorQuery(err, res);
+                return;
+            }
+            let events = [];
+            results.forEach(doc => {
+                events.push(new Event(doc).toJSON());
+            });
+            res.send({status: 'OK', data: events});
+        });
+    } else {
+        res.status(403).send({status: 'ERROR', msg: 'El negocio con el ID: '+id+' no existe'});
+    }
+}
+
+/**
  * Se encarga de gestionar las compras de entradas (POST)
  */
 exports.buyTickets = function(req, res) {

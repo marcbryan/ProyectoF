@@ -3,7 +3,6 @@ export class BusinessUser {
     name: String;
     last_name: String;
     email: String;
-    password: String;
     role: String;
     business_id: String;
     createdAt: String;

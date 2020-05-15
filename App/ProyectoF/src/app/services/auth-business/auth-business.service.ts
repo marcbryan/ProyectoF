@@ -28,15 +28,23 @@ export class AuthBusinessService implements IAuthService {
     const expiresAt = moment().add(res.expiresIn, 'second');
     localStorage.setItem('b_access_token', res.token);
     localStorage.setItem('b_expires_at', JSON.stringify(expiresAt.valueOf()));
+    localStorage.setItem('b_user', JSON.stringify(this.currentUser));
   }
   
   logout() {
     localStorage.removeItem('b_access_token');
     localStorage.removeItem('b_expires_at');
+    localStorage.removeItem('b_user');
   }
   
   get isLoggedIn(): boolean {
     let authToken = localStorage.getItem('b_access_token');
+    if (this.currentUser == null) {
+      this.currentUser = JSON.parse(localStorage.getItem('b_user'));
+      if (this.currentUser == null) {
+        this.logout();
+      } 
+    }
     return (authToken !== null) ? true : false;
   }
 

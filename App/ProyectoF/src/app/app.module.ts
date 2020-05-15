@@ -12,6 +12,8 @@ import { AuthenticatedBusinessLayoutComponent } from './components/authenticated
 import { ToolbarComponent, ConfirmDialog } from './components/toolbar/toolbar.component';
 import { BusinessToolbarComponent, LogoutDialog } from './components/business-toolbar/business-toolbar.component';
 import { EventCardComponent } from './components/event-card/event-card.component';
+import { BusinessEventCardComponent } from './components/business-event-card/business-event-card.component';
+import { EventInfoDialog } from './components/dialogs/event-info/event-info.dialog';
 import { LoginPage } from './login/login.page';
 import { RegisterPage } from './register/register.page';
 import { MyTicketsPage } from './my-tickets/my-tickets.page';
@@ -47,8 +49,10 @@ import { NumericDirective } from './numeric.directive';
     BusinessToolbarComponent,
     ToolbarComponent,
     EventCardComponent,
+    BusinessEventCardComponent,
     ConfirmDialog,
     LogoutDialog,
+    EventInfoDialog,
     LoginPage,
     RegisterPage,
     MyTicketsPage,

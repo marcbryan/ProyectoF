@@ -1,1 +1,8 @@
-<p>business-events works!</p>
+<ul *ngIf="(events | async)?.length > 0" class="events-list">
+    <li *ngFor="let ev of events | async">
+        <business-event-card [event]="ev"></business-event-card>
+    </li>
+</ul>
+<div class="msg" *ngIf="(events | async)?.length == 0">
+    <p>Tu negocio no tiene eventos</p>
+</div>

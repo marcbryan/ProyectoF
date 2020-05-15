@@ -34,6 +34,9 @@ router.post('/tickets/buy', event_controller.buyTickets);
 // GET request -> obtener eventos favoritos del usuario
 router.get('/events/fav', event_controller.getFavEvents);
 
+// GET request -> obtener todos los eventos de un negocio
+router.get('/events/business', event_controller.getEventsFromBusiness);
+
 // --- API Business User ---
 
 // POST request -> login
