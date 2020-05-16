@@ -159,7 +159,7 @@ exports.createEvent = function(req, res) {
             res.send({status: 'OK', msg: 'Evento creado correctamente!'});
         });
     } else {
-        res.send({status: 'ERROR', msg: 'Faltan poder crear el evento. Vuelve a intentarlo'});
+        res.status(403).send({status: 'ERROR', msg: 'Faltan poder crear el evento. Vuelve a intentarlo'});
     }
 }
 

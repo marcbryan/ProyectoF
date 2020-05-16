@@ -79,6 +79,39 @@ $pf-grey: (
     )
 );
 
+$pf-blue: (
+    50 : #e4eefc,
+    100 : #bad5f8,
+    200 : #8db9f4,
+    300 : #5f9def,
+    400 : #3c88eb,
+    500 : #1a73e8,
+    600 : #176be5,
+    700 : #1360e2,
+    800 : #0f56de,
+    900 : #0843d8,
+    A100 : #ffffff,
+    A200 : #cfdaff,
+    A400 : #9cb3ff,
+    A700 : #829fff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
@@ -106,7 +139,7 @@ $ProyectoF-theme: mat-light-theme($ProyectoF-primary, $ProyectoF-accent, $Proyec
 .dark-theme {
     background: #36393f;
     color: $light-primary-text;
-    $dark-primary: mat-palette($pf-red);
+    $dark-primary: mat-palette($pf-blue);
     $dark-accent: mat-palette($pf-grey);
     $dark-warn: mat-palette($mat-red);
 

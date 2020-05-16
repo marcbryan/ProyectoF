@@ -20,8 +20,8 @@ export class AuthBusinessService implements IAuthService {
     return this.http.post<any>(this.endpoint+'/login', user);
   }
 
-  signUp(user: BusinessUser) {
-    return this.http.post<any>(this.endpoint+'/create', user);
+  signUp(data: any) {
+    return this.http.post<any>(this.endpoint+'/register', data);
   }
   
   setSession(res) {

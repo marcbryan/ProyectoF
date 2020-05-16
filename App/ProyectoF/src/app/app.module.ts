@@ -21,6 +21,7 @@ import { EventsAvailablePage } from './events-available/events-available.page';
 import { BusinessLoginPage } from './business-login/business-login.page';
 import { BusinessEventsPage } from './business-events/business-events.page';
 import { CreateEventPage } from './create-event/create-event.page';
+import { BusinessRegisterPage } from './business-register/business-register.page';
 import { ToolbarTitleService } from './services/toolbar-title/toolbar-title.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -41,6 +42,7 @@ import { MatMomentDatetimeModule } from '@mat-datetimepicker/moment';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { MatStepperModule } from '@angular/material/stepper';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NumericDirective } from './numeric.directive';
 
@@ -65,6 +67,7 @@ import { NumericDirective } from './numeric.directive';
     BusinessLoginPage,
     BusinessEventsPage,
     CreateEventPage,
+    BusinessRegisterPage,
     NumericDirective
   ],
   imports: [
@@ -89,6 +92,7 @@ import { NumericDirective } from './numeric.directive';
     MatDatetimepickerModule,
     LoadingBarModule,
     LoadingBarHttpClientModule,
+    MatStepperModule,
     AppRoutingModule,
     BrowserAnimationsModule
   ],

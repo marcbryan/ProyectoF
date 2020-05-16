@@ -59,25 +59,24 @@ exports.user_create_post = function(req, res) {
                         res.send({status: 'OK', msg: 'Cuenta creada correctamente'});
                         console.log('[INFO] User created succesfully!!');
                     });
-                    return;
-                }
-                let emailUsed = false, phoneUsed = false;
-                results.forEach(user => {
-                    if (user.email == req.body.email) {
-                        emailUsed = true;
+                } else {
+                    let emailUsed = false, phoneUsed = false;
+                    results.forEach(user => {
+                        if (user.email == req.body.email) {
+                            emailUsed = true;
+                        }
+                        if (user.phone == req.body.phone) {
+                            phoneUsed = true;
+                        }
+                    });
+                    if (emailUsed && phoneUsed) {
+                        res.status(403).send({status: 'ERROR', msg: 'El correo electrónico y el número de móvil introducidos ya estan en uso'});
                     }
-                    if (user.phone == req.body.phone) {
-                        phoneUsed = true;
+                    else if (emailUsed) {
+                        res.status(403).send({status: 'ERROR', msg: 'El correo electrónico introducido ya está en uso'});
+                    } else {
+                        res.status(403).send({status: 'ERROR', msg: 'El número de móvil introducido ya está en uso'});
                     }
-                });
-                if (emailUsed && phoneUsed) {
-                    res.status(403).send({status: 'ERROR', msg: 'El correo electrónico y el número de móvil introducidos ya estan en uso'});
-                }
-                else if (emailUsed) {
-                    res.status(403).send({status: 'ERROR', msg: 'El correo electrónico introducido ya está en uso'});
-                }
-                else if (phoneUsed) {
-                    res.status(403).send({status: 'ERROR', msg: 'El número de móvil introducido ya está en uso'});
                 }
             });
         }

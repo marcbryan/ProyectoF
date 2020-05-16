@@ -45,4 +45,7 @@ router.post('/events/create', event_controller.createEvent);
 // POST request -> login
 router.post('/business/login', business_user_controller.business_user_login);
 
+// POST request -> registro
+router.post('/business/register', business_user_controller.business_register);
+
 module.exports = router;

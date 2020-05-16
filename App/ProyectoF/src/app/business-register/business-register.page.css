@@ -1,0 +1,19 @@
+
+.mat-stepper-horizontal { height: 100vh; }
+
+.mat-stepper-horizontal form { margin-top: 10vh; }
+  
+.mat-form-field {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+form .mat-form-field:last-of-type { margin-bottom: 0; }
+
+.mat-stepper-horizontal form > div.button { display: flex; justify-content: flex-end; margin-top: 20px; }
+
+.mat-stepper-horizontal form > div.buttons { display: flex; justify-content: space-between; margin-top: 20px; }
