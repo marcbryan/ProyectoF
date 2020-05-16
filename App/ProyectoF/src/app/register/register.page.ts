@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterPage implements OnInit {
   registerForm: FormGroup
-  email = new FormControl('', [Validators.required, Validators.email]);
+  email = new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]);
   phone = new FormControl('', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]);
   zipcode = new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]);
 
@@ -53,19 +53,19 @@ export class RegisterPage implements OnInit {
   }
 
   getEmailErrorMessage() {
-    if (this.email.hasError('email')) {
+    if (this.email.hasError('email') || this.email.hasError('pattern')) {
       return 'Formato incorrecto';
     }
   }
 
   getPhoneErrorMessage() {
-    if (this.phone.errors.minlength || this.phone.errors.maxLength) {      
+    if (this.phone.errors.minlength || this.phone.errors.maxlength) {      
       return 'Debe tener 9 números';
     }
   }
 
   getZipcodeErrorMessage() {
-    if (this.zipcode.errors.minlength || this.zipcode.errors.maxLength) {      
+    if (this.zipcode.errors.minlength || this.zipcode.errors.maxlength) {      
       return 'Debe tener 5 números';
     }
   }

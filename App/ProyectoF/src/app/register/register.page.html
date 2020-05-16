@@ -13,13 +13,14 @@
         <div class="row-column">
             <mat-form-field appearance="legacy" color="accent">
                 <mat-label>Correo electrónico</mat-label>
-                <input matInput type="email" formControlName="email">
+                <input type="email" matInput formControlName="email" [email]="true">
                 <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="legacy" color="accent">
                 <mat-label>Número de móvil</mat-label>
                 <input numeric type="text" matInput formControlName="phone" minlength="9" maxlength="9">
                 <mat-error *ngIf="phone.invalid">{{getPhoneErrorMessage()}}</mat-error>
+                <mat-hint align="end">{{phone.value?.length || 0}}/9</mat-hint>
             </mat-form-field>
         </div>
         <div class="row">
@@ -31,6 +32,7 @@
                 <mat-label>Código postal</mat-label>
                 <input numeric type="text" matInput formControlName="zipcode" minlength="5" maxlength="5">
                 <mat-error *ngIf="zipcode.invalid">{{getZipcodeErrorMessage()}}</mat-error>
+                <mat-hint align="end">{{zipcode.value?.length || 0}}/5</mat-hint>
             </mat-form-field>
         </div>
         <div class="row">

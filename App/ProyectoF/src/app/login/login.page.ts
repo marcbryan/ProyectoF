@@ -13,7 +13,7 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 })
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
-  email = new FormControl('', [Validators.required, Validators.email]);
+  email = new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]);
   password = new FormControl('', [Validators.required]);
 
 
@@ -57,7 +57,7 @@ export class LoginPage implements OnInit {
     if (this.email.hasError('required')) {
       return 'Introduce tu correo electrónico';
     }
-    else if (this.email.hasError('email')) {
+    else if (this.email.hasError('email') || this.email.hasError('pattern')) {
       return 'Formato incorrecto';
     }
   }

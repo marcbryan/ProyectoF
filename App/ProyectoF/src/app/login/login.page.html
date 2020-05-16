@@ -2,7 +2,7 @@
 <div class="center">
     <div class="container">
         <div class="img-container">
-            <img src="assets/img/logo.svg" alt="logo">
+            <img src="assets/img/logo.png" alt="logo">
         </div>
         <div class="form-container">
             <form [formGroup]="loginForm" (ngSubmit)="login()">
@@ -19,12 +19,11 @@
                 <button mat-raised-button color="primary">Iniciar sesión</button>
                 <div class="form-footer">
                     <a routerLink="/crear-cuenta" routerLinkActive="active">Crear cuenta</a>
-                    <a href="">¿Has olvidado tu contraseña?</a>
+                    <!-- <a href="">¿Has olvidado tu contraseña?</a> -->
                 </div>
-                <button mat-raised-button class="google-login-button">
-                    <img src="assets/img/google-logo.svg" alt="google-logo"/> Iniciar sesión con Google
-                </button>
-                <!-- <div class="fb-login-button" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div> -->
+                <!-- <button mat-raised-button class="google-login-button">
+                    <img src="assets/img/google-logo.svg" alt="google-logo"/> Acceder con Google
+                </button> -->
             </form>
         </div>
     </div>

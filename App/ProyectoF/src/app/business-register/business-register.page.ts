@@ -21,7 +21,7 @@ export class BusinessRegisterPage implements OnInit {
   userForm: FormGroup;
   zipcode = new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]);
   phone = new FormControl('', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]);
-  email = new FormControl('', [Validators.required, Validators.email]);
+  email = new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]);
   phone2 = new FormControl('', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]);
 
   constructor(
@@ -81,7 +81,7 @@ export class BusinessRegisterPage implements OnInit {
   }
 
   getEmailErrorMessage() {
-    if (this.email.hasError('email'))
+    if (this.email.hasError('email') || this.email.hasError('pattern'))
       return 'Formato incorrecto';
   }
 

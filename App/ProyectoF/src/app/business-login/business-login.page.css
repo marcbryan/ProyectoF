@@ -15,11 +15,11 @@
 
 .center > div { display: flex; padding: 10px; }
 
-.img-container { width: 35%; margin-top: 10%; display: flex; justify-content: center; }
+.img-container { width: 35%; margin-top: 70px; display: flex; justify-content: center; }
 
 .img-container > img { padding: 0 40px 50px 80px; }
 
-.form-container { width: 65%; margin-top: 6.25%; }
+.form-container { width: 65%; margin-top: 45px; }
 
 .form-footer { display: flex; justify-content: space-between; margin-top: 5px; }
 
@@ -40,4 +40,15 @@ mat-icon.business_center {
     color: white;
 }
 
-.white { color: white; }
+@media(max-width: 768px) {
+    .center { height: auto; }
+    .container { flex-direction: column; padding-top: 20px!important; }
+    .img-container { margin: 0 auto; width: auto; }
+    .img-container > img { padding: 0; }
+    .form-container { width: auto; margin: 0; }
+    .form-container mat-form-field.mat-form-field, .form-container button.mat-button-base { font-size: 14px; }
+}
+
+@media(max-width: 640px) {
+    .center { width: 90%; }
+}

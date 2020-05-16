@@ -15,11 +15,11 @@
 
 .center > div { display: flex; padding: 10px; }
 
-.img-container { width: 35%; margin-top: 10%; }
+.img-container { width: 35%; margin-top: 60px; }
 
-.img-container > img { padding: 0 40px 50px 80px; }
+.img-container > img { padding: 0 0 50px 30%; }
 
-.form-container { width: 65%; margin-top: 6.25%; }
+.form-container { width: 65%; margin-top: 45px; }
 
 .form-footer { display: flex; justify-content: space-between; margin-top: 5px; }
 
@@ -36,3 +36,15 @@ form > mat-form-field.mat-form-field:first-child { margin-bottom: 20px; }
 button.google-login-button { margin-top: 25px; margin-bottom: 10px; }
 
 button.google-login-button img { width: 50px; height: 24px; padding: 5px 0; }
+
+@media(max-width: 768px) {
+    .center { height: auto; }
+    .container { flex-direction: column; padding-top: 20px!important; }
+    .img-container { margin: 0 auto; width: auto; }
+    .img-container > img { padding: 0; }
+    .form-container { width: auto; margin: 0; }
+}
+
+@media(max-width: 640px) {
+    .center { width: 90%; }
+}
