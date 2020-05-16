@@ -135,6 +135,34 @@ exports.getFavEvents = function(req, res) {
     }
 }
 
+exports.createEvent = function(req, res) {
+    console.log('[INFO] Event creation REQ at '+new Date());
+    let event = {
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price,
+        starts: req.body.starts,
+        ends: req.body.ends, 
+        location: req.body.location,
+        ticketsForSale: req.body.ticketsForSale,
+        business_id: req.body.business_id
+    }
+
+    if (isset(event.name) && isset(event.description) && isset(event.price) && isset(event.starts) && isset(event.ends) && isset(event.location) && isset(event.ticketsForSale) && isset(event.business_id)) {
+        let mEvent = new Event(event);
+        mEvent.tickets_available = mEvent.ticketsForSale;
+        mEvent.save(function (err) {
+            if (err) {
+                onErrorQuery(err, res);
+                return;
+            }
+            res.send({status: 'OK', msg: 'Evento creado correctamente!'});
+        });
+    } else {
+        res.send({status: 'ERROR', msg: 'Faltan poder crear el evento. Vuelve a intentarlo'});
+    }
+}
+
 
 function onErrorQuery(err, res) {
     console.log(err);

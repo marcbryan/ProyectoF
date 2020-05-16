@@ -14,6 +14,9 @@ export class EventsService {
 
   constructor(private http: HttpClient, public router: Router) {}
 
+  /**
+   * Hace una llamada a la API de eventos para obtener una lista de los eventos disponibles
+   */
   getEvents(): Observable<Event[]> {
     return this.http.get<any>(this.endpoint, {headers: this.headers}).pipe(
       map(res => res.data
@@ -29,6 +32,10 @@ export class EventsService {
     );
   }
 
+  /**
+   * Hace una llamada a la API de eventos para obtener todos los eventos de un negocio
+   * @param {string} id El ID del negocio
+   */
   getEventsFromBusiness(id): Observable<Event[]> {
     let url = this.endpoint+'/business';
     let params = new HttpParams().set('id', id);  
@@ -44,5 +51,13 @@ export class EventsService {
         })
       )
     );
+  }
+
+  /**
+   * Hace una llamada a la API de eventos para crear un evento
+   * @param {Event} event - Un objeto del evento que queremos crear con los datos correspondientes
+   */
+  createEvent(event: Event) {
+    return this.http.post<any>(this.endpoint+'/create', event, {headers: this.headers});
   }
 }

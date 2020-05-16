@@ -1,5 +1,5 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './services/auth/auth.guard';
 import { AuthBusinessGuard } from './services/auth-business/auth-business.guard';
@@ -20,6 +20,7 @@ import { MyTicketsPage } from './my-tickets/my-tickets.page';
 import { EventsAvailablePage } from './events-available/events-available.page';
 import { BusinessLoginPage } from './business-login/business-login.page';
 import { BusinessEventsPage } from './business-events/business-events.page';
+import { CreateEventPage } from './create-event/create-event.page';
 import { ToolbarTitleService } from './services/toolbar-title/toolbar-title.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -34,6 +35,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDatetimepickerModule, MAT_DATETIME_FORMATS } from '@mat-datetimepicker/core';
+import { MatMomentDatetimeModule } from '@mat-datetimepicker/moment';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -59,6 +64,7 @@ import { NumericDirective } from './numeric.directive';
     EventsAvailablePage,
     BusinessLoginPage,
     BusinessEventsPage,
+    CreateEventPage,
     NumericDirective
   ],
   imports: [
@@ -78,12 +84,45 @@ import { NumericDirective } from './numeric.directive';
     MatDialogModule,
     MatCardModule,
     MatProgressBarModule,
+    MatDatepickerModule,
+    MatMomentDatetimeModule,
+    MatDatetimepickerModule,
     LoadingBarModule,
     LoadingBarHttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [Title, AuthGuard, AuthBusinessGuard, ToolbarTitleService],
+  providers: [Title, AuthGuard, AuthBusinessGuard, ToolbarTitleService, MatDatepickerModule, MatDatetimepickerModule,
+    {
+      provide: LOCALE_ID,
+      useValue: "es-ES"
+    },
+    {
+      provide: MAT_DATE_LOCALE,
+      useExisting: LOCALE_ID
+    },
+    {
+      provide: MAT_DATETIME_FORMATS,
+      useValue: {
+        parse: {
+          dateInput: "L",
+          monthInput: "MMMM",
+          timeInput: "LT",
+          datetimeInput: "L LT"
+        },
+        display: {
+          dateInput: "L",
+          monthInput: "MMMM",
+          datetimeInput: "L LT",
+          timeInput: "LT",
+          monthYearLabel: "MMM YYYY",
+          dateA11yLabel: "LL",
+          monthYearA11yLabel: "MMMM YYYY",
+          popupHeaderDateLabel: "ddd, DD MMM"
+        }
+      }
+    }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [ConfirmDialog, LogoutDialog]
 })

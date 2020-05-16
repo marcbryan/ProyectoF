@@ -37,6 +37,9 @@ router.get('/events/fav', event_controller.getFavEvents);
 // GET request -> obtener todos los eventos de un negocio
 router.get('/events/business', event_controller.getEventsFromBusiness);
 
+// POST request -> crear un evento
+router.post('/events/create', event_controller.createEvent);
+
 // --- API Business User ---
 
 // POST request -> login

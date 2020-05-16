@@ -13,6 +13,7 @@ import { AuthenticatedLayoutComponent } from './components/authenticated-layout.
 import { AuthenticatedBusinessLayoutComponent } from './components/authenticated-business-user-layout.component';
 import { BusinessLoginPage } from './business-login/business-login.page';
 import { BusinessEventsPage } from './business-events/business-events.page';
+import { CreateEventPage } from './create-event/create-event.page';
 
 const routes: Routes = [
   // Rutas app
@@ -33,6 +34,7 @@ const routes: Routes = [
     canActivate: [AuthBusinessGuard],
     children: [
       { path: 'eventos', component: BusinessEventsPage, data: {title: 'Nuestros eventos'} },
+      { path: 'crear-evento', component: CreateEventPage, data: {title: 'Crea un evento'} },
       { path: '**', redirectTo: 'eventos' }
     ],
     

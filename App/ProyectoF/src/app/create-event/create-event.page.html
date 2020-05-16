@@ -1,0 +1,48 @@
+<ngx-loading-bar color="#1a73e8" [fixed]="false"></ngx-loading-bar>
+<div class="center dark-theme">
+    <form [formGroup]="createEvent" (ngSubmit)="create()">
+        <div class="row">
+            <mat-form-field appearance="legacy" color="accent">
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="name" required>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="legacy" color="accent">
+                <mat-label>Descripción</mat-label>
+                <textarea matInput formControlName="description" rows="1" required></textarea>
+            </mat-form-field>
+        </div>
+        <div class="row two-fields">
+            <mat-form-field appearance="legacy" color="accent">
+                <mat-label>Fecha y hora de inicio</mat-label>
+                <mat-datetimepicker-toggle [for]="starts" matSuffix></mat-datetimepicker-toggle>
+                <mat-datetimepicker #starts type="datetime" openOnFocus="true" timeInterval="5"></mat-datetimepicker>
+                <input matInput formControlName="starts" [matDatetimepicker]="starts" [min]="minDate" required autocomplete="false">
+            </mat-form-field>
+            <mat-form-field appearance="legacy" color="accent">               
+                <mat-label>Fecha y hora de finalización</mat-label>
+                <mat-datetimepicker-toggle [for]="ends" matSuffix></mat-datetimepicker-toggle>
+                <mat-datetimepicker #ends type="datetime" openOnFocus="true" timeInterval="5"></mat-datetimepicker>
+                <input matInput formControlName="ends" [matDatetimepicker]="ends" [min]="minDate" required autocomplete="false">
+            </mat-form-field>
+        </div>
+        <div class="row two-fields">
+            <mat-form-field appearance="legacy" color="accent">
+                <mat-label>Precio</mat-label>
+                <input matInput type="number" min="0.05" formControlName="price" required>
+            </mat-form-field>
+            <mat-form-field appearance="legacy" color="accent">
+                <mat-label>Nº de entradas a la venta</mat-label>
+                <input matInput type="number" min="5" step="5" formControlName="ticketsForSale" required>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="legacy" color="accent">
+                <mat-label>Ubicación</mat-label>
+                <input matInput formControlName="location" required>
+            </mat-form-field>
+        </div>
+        <button type="submit" mat-raised-button color="primary">Crear evento</button>
+    </form>
+</div>

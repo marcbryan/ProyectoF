@@ -96,8 +96,15 @@ $ProyectoF-theme: mat-light-theme($ProyectoF-primary, $ProyectoF-accent, $Proyec
 // that you are using.
 @include angular-material-theme($ProyectoF-theme);
 
+// Import del los estilos del DatetimePicker
+@import '~@mat-datetimepicker/core/datetimepicker/datetimepicker-theme.scss';
+
+// Añadimos los estilos del DatetimePicker al tema principal
+@include mat-datetimepicker-theme($ProyectoF-theme);
+
 // Tema oscuro
 .dark-theme {
+    background: #36393f;
     color: $light-primary-text;
     $dark-primary: mat-palette($pf-red);
     $dark-accent: mat-palette($pf-grey);
@@ -106,5 +113,7 @@ $ProyectoF-theme: mat-light-theme($ProyectoF-primary, $ProyectoF-accent, $Proyec
     $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
     @include angular-material-theme($dark-theme);
-}
 
+    // Añadimos los estilos del DatetimePicker al tema oscuro
+    @include mat-datetimepicker-theme($dark-theme);
+}
