@@ -8,8 +8,7 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
-  styleUrls: ['./login.page.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./login.page.css']
 })
 export class LoginPage implements OnInit {
   loginForm: FormGroup;

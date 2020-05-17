@@ -15,6 +15,7 @@ import { BusinessLoginPage } from './business-login/business-login.page';
 import { BusinessEventsPage } from './business-events/business-events.page';
 import { CreateEventPage } from './create-event/create-event.page';
 import { BusinessRegisterPage } from './business-register/business-register.page';
+import { LandingPage } from './landing/landing.page';
 
 const routes: Routes = [
   // Rutas app
@@ -22,8 +23,7 @@ const routes: Routes = [
     path: '',
     component: AnonymousLayoutComponent,
     children: [
-      // De momento el path / redirige a /login
-      { path: '', redirectTo: '/login', pathMatch: 'full' },
+      { path: '', component: LandingPage, data: {title: 'Bienvenido'} },
       { path: 'login', component: LoginPage, data: {title: 'Login'} },
       { path: 'crear-cuenta', component: RegisterPage, data: {title: 'Crear cuenta'} },
       { path: 'negocios/login', component: BusinessLoginPage, data: {title: 'Login Negocios'}},
@@ -52,8 +52,8 @@ const routes: Routes = [
       { path: '**', redirectTo: 'mis-entradas' }
     ]
   },
-  // De momento las rutas que no existen se redirigen a /login
-  { path: '**', redirectTo: 'login' }
+  // Las rutas que no existen se redirigen a la landing page
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

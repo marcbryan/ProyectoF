@@ -22,6 +22,7 @@ import { BusinessLoginPage } from './business-login/business-login.page';
 import { BusinessEventsPage } from './business-events/business-events.page';
 import { CreateEventPage } from './create-event/create-event.page';
 import { BusinessRegisterPage } from './business-register/business-register.page';
+import { LandingPage } from './landing/landing.page';
 import { ToolbarTitleService } from './services/toolbar-title/toolbar-title.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -68,6 +69,7 @@ import { NumericDirective } from './numeric.directive';
     BusinessEventsPage,
     CreateEventPage,
     BusinessRegisterPage,
+    LandingPage,
     NumericDirective
   ],
   imports: [
