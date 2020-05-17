@@ -1,0 +1,46 @@
+[
+    {
+        "title": "Wiki ProyectoF",
+        "description": "La wiki de ProyectoF, aquí encontrarás todo la información sobre este proyecto.",
+        "buttonText": "Wiki",
+        "href": "https://wiket.esteveterradas.cat/index.php/PROYECTO_F",
+        "img": "assets/img/wiki.png",
+        "size": {
+            "width": "64px",
+            "height": "64px"
+        }
+    },
+    {
+        "title": "Documentación API ProyectoF",
+        "description": "Toda la documentación sobre las APIs que utilizan la app Android tanto como la app Web",
+        "buttonText": "Documentación",
+        "img": "assets/img/logo.png",
+        "href": "http://proyectof.tk",
+        "size": {
+            "width": "auto",
+            "height": "64px"
+        }
+    },
+    {
+        "title": "GitHub app Android",
+        "description": "Repositorio de la aplicación móvil en Android",
+        "buttonText": "Repo",
+        "img": "assets/img/GitHub-Mark.png",
+        "href": "https://github.com/thecalored/Projecto-Final-Projecto-F",
+        "size": {
+            "width": "64px",
+            "height": "64px"
+        }
+    },
+    {
+        "title": "GitHub app Web",
+        "description": "Repositorio de la aplicación Web",
+        "buttonText": "Repo",
+        "img": "assets/img/GitHub-Mark.png",
+        "href": "https://github.com/marcbryan/ProyectoF",
+        "size": {
+            "width": "64px",
+            "height": "64px"
+        }
+    }
+]

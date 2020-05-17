@@ -1,10 +1,11 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './services/auth/auth.guard';
 import { AuthBusinessGuard } from './services/auth-business/auth-business.guard';
 
-import { AppRoutingModule } from './app-routing.module';
+// Componentes
 import { AppComponent } from './app.component';
 import { AnonymousLayoutComponent } from './components/anonymous-layout.component';
 import { AuthenticatedLayoutComponent } from './components/authenticated-layout.component';
@@ -14,6 +15,8 @@ import { BusinessToolbarComponent, LogoutDialog } from './components/business-to
 import { EventCardComponent } from './components/event-card/event-card.component';
 import { BusinessEventCardComponent } from './components/business-event-card/business-event-card.component';
 import { EventInfoDialog } from './components/dialogs/event-info/event-info.dialog';
+
+// Páginas
 import { LoginPage } from './login/login.page';
 import { RegisterPage } from './register/register.page';
 import { MyTicketsPage } from './my-tickets/my-tickets.page';
@@ -23,6 +26,9 @@ import { BusinessEventsPage } from './business-events/business-events.page';
 import { CreateEventPage } from './create-event/create-event.page';
 import { BusinessRegisterPage } from './business-register/business-register.page';
 import { LandingPage } from './landing/landing.page';
+import { ProjectInfoPage } from './project-info/project-info.page';
+
+// Módulos
 import { ToolbarTitleService } from './services/toolbar-title/toolbar-title.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -70,9 +76,11 @@ import { NumericDirective } from './numeric.directive';
     CreateEventPage,
     BusinessRegisterPage,
     LandingPage,
+    ProjectInfoPage,
     NumericDirective
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
@@ -95,7 +103,6 @@ import { NumericDirective } from './numeric.directive';
     LoadingBarModule,
     LoadingBarHttpClientModule,
     MatStepperModule,
-    AppRoutingModule,
     BrowserAnimationsModule
   ],
   providers: [Title, AuthGuard, AuthBusinessGuard, ToolbarTitleService, MatDatepickerModule, MatDatetimepickerModule,

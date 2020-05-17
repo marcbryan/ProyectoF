@@ -16,6 +16,7 @@ import { BusinessEventsPage } from './business-events/business-events.page';
 import { CreateEventPage } from './create-event/create-event.page';
 import { BusinessRegisterPage } from './business-register/business-register.page';
 import { LandingPage } from './landing/landing.page';
+import { ProjectInfoPage } from './project-info/project-info.page';
 
 const routes: Routes = [
   // Rutas app
@@ -27,7 +28,8 @@ const routes: Routes = [
       { path: 'login', component: LoginPage, data: {title: 'Login'} },
       { path: 'crear-cuenta', component: RegisterPage, data: {title: 'Crear cuenta'} },
       { path: 'negocios/login', component: BusinessLoginPage, data: {title: 'Login Negocios'}},
-      { path: 'negocios/registro', component: BusinessRegisterPage, data: {title: 'Registrar un negocio'}}
+      { path: 'negocios/registro', component: BusinessRegisterPage, data: {title: 'Registrar un negocio'}},
+      { path: 'sobre-proyectof', component: ProjectInfoPage, data: {title: 'Sobre el proyecto' }}
     ]
   },
   {

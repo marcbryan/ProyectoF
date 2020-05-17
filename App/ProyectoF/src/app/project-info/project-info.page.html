@@ -1,0 +1,11 @@
+<h1>Referencias ProyectoF</h1>
+<div class="center">
+    <mat-card class="card" *ngFor="let card of cards;">
+        <div>
+            <h2>{{card.title}}</h2>
+            <p>{{card.description}}</p>
+            <a [href]="card.href" mat-button color="primary">Ver {{card.buttonText}}</a>
+        </div>
+        <img [src]="card.img" [style.width]="card.size.width" [style.height]="card.size.height" alt="Imagen">
+    </mat-card>
+</div>

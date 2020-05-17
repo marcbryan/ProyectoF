@@ -31,3 +31,12 @@ a {
 a:focus { background-color: rgba(26,115,232,0.149); }
 
 .mat-simple-snackbar-action { color: #1a73e8; }
+
+mat-icon.no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
