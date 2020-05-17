@@ -11,13 +11,15 @@ import { ToolbarTitleService } from 'src/app/services/toolbar-title/toolbar-titl
 })
 export class BusinessToolbarComponent implements OnInit {
   title: string = '';
+  fullName: string = '';
 
-  constructor(public dialog: MatDialog, private toolbarTitleService: ToolbarTitleService) {}
+  constructor(public dialog: MatDialog, private toolbarTitleService: ToolbarTitleService, private authService: AuthBusinessService) { }
 
   ngOnInit(): void {
     this.toolbarTitleService.title.subscribe(updatedTitle => {
       this.title = updatedTitle;
     });
+    this.fullName = this.authService.currentUser.name + ' ' + this.authService.currentUser.last_name;
   }
 
   openDialog(): void {

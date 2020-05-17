@@ -4,7 +4,10 @@
         <mat-icon matTooltip="Ver detalles" (click)="openDialog()">event_note</mat-icon>
     </div>
     <div class="card-container">
-        <img src="assets/img/default-img_event.jpg" alt="Imagen evento">
+        <img *ngIf="event.img_url != 'default'; else default" src="{{event.img_url}}" alt="Imagen evento">
+        <ng-template #default>
+            <img src="assets/img/default-img_event.jpg" alt="Imagen evento">
+        </ng-template>
         <div class="description">
             <p><span class="title">Entradas:</span> {{event.ticketsForSale}}</p>
             <p><span class="title">Entradas disponibles:</span> {{event.tickets_available}}</p>

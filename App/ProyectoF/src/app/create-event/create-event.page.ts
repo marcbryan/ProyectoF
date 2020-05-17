@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -15,6 +15,9 @@ import * as moment from 'moment';
 export class CreateEventPage implements OnInit {
   createEvent: FormGroup;
   minDate: moment.Moment;
+  image: String = null;
+  fileName: String = '';
+  @ViewChild('uploadFile') uploadFile;
 
   constructor(public builder: FormBuilder, public snackBar: MatSnackBar, private router: Router, private authService: AuthBusinessService, private eventsService: EventsService, private loadingBar: LoadingBarService) {
     this.createEvent = this.builder.group({
@@ -40,9 +43,13 @@ export class CreateEventPage implements OnInit {
         this.snackBar.open('La fecha de inicio no puede ser mayor que la de finalización', 'Aceptar', {duration: 2000});
         return;
       }
-
+      
       let event = this.createEvent.value;
       event.business_id = this.authService.currentUser.business_id;
+      // Si ha seleccionado una imagen la añadimos
+      if (this.image != null) {
+        event.image = this.image;
+      }
       this.loadingBar.start();
       
       this.eventsService.createEvent(event)
@@ -62,6 +69,29 @@ export class CreateEventPage implements OnInit {
         });
     } else {
       this.snackBar.open('Faltan campos por rellenar', 'Aceptar', {duration: 2000});
+    }
+  }
+
+  /**
+   * Hace click al botón del input oculto tipo file para seleccionar una imagen
+   */
+  getFile() {
+    this.uploadFile.nativeElement.click();
+  }
+
+  /**
+   * Función que se ejecuta después de seleccionar una imagen
+   * @param event - El evento de esta acción
+   */
+  onFileSelected(event) {
+    this.fileName = event.target.files[0].name;
+    const reader = new FileReader();
+    if(event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.image = reader.result as string;
+      };
     }
   }
 

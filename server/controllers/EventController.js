@@ -1,6 +1,11 @@
 var Event = require('../models/Event');
 var User = require('../models/User');
 
+require('dotenv').config();
+var AWS = require('aws-sdk'); 
+AWS.config.update({region : process.env.REGION});
+s3 = new AWS.S3({apiVersion: '2006-03-01'});
+
 /**
  * Obtiene todos los eventos los cuales su fecha de inicio sea posterior a hoy,
  * para ser exactos todos los posteriores al momento de realizar la petición (GET)
@@ -151,13 +156,44 @@ exports.createEvent = function(req, res) {
     if (isset(event.name) && isset(event.description) && isset(event.price) && isset(event.starts) && isset(event.ends) && isset(event.location) && isset(event.ticketsForSale) && isset(event.business_id)) {
         let mEvent = new Event(event);
         mEvent.tickets_available = mEvent.ticketsForSale;
-        mEvent.save(function (err) {
-            if (err) {
-                onErrorQuery(err, res);
-                return;
+        // Si el usuario ha subido una imagen la guardamos
+        let msg = 'Evento creado correctamente!';
+        let img = req.body.image;
+        if (isset(img)) {
+            const base64 = new Buffer.from(img.replace(/^data:image\/\w+;base64,/, ''), 'base64');
+            console.log('Image? '+isset(base64));
+            if (isset(base64)) {
+                const type = new String(img).split(';')[0].split('/')[1];
+                var uploadParams = {
+                    Bucket: process.env.BUCKET,
+                    Key: 'img-'+Date.now()+'.'+type,
+                    Body: base64,
+                    ContentEncoding: 'base64',
+                    ContentType: 'image/'+type
+                };
+                s3.upload (uploadParams, function (err, data) {
+                    if (err) {
+                        console.log('Error', err);
+                        mEvent.save();
+                        res.send({status: 'OK', msg: msg + ' La imagen no se ha podido guardar.',});
+                    }
+                    if (data) {
+                        console.log('[INFO] Image uploaded successfully:', data.Location);
+                        mEvent.img_url = data.Location;
+                        mEvent.save(function (err) {
+                            if (err) {
+                                onErrorQuery(err, res);
+                                return;
+                            }
+                            res.send({status: 'OK', msg: msg});
+                        });
+                    }
+                });
             }
-            res.send({status: 'OK', msg: 'Evento creado correctamente!'});
-        });
+        } else {
+            mEvent.save();
+            res.send({status: 'OK', msg: msg});
+        }
     } else {
         res.status(403).send({status: 'ERROR', msg: 'Faltan poder crear el evento. Vuelve a intentarlo'});
     }

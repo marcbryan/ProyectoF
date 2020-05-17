@@ -43,6 +43,11 @@
                 <input matInput formControlName="location" required>
             </mat-form-field>
         </div>
+        <div class="row">
+            <button type="button" mat-raised-button (click)="getFile()" matTooltip="Añade una imagen al evento">Subir imagen</button>
+            <span>{{fileName}}</span>
+            <input #uploadFile type="file" accept="image/*" (change)="onFileSelected($event)" hidden>
+        </div>
         <button type="submit" mat-raised-button color="primary">Crear evento</button>
     </form>
 </div>

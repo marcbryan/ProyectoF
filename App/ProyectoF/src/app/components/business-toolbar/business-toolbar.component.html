@@ -11,6 +11,10 @@
 </mat-toolbar>
 <mat-sidenav-container>
     <mat-sidenav #sidenav class="dark-theme">
+        <div class="user-info">
+            <img src="assets/img/usuario.svg" height="128px" alt="Foto perfil">
+            <p>{{fullName}}</p>
+        </div>
         <mat-nav-list>
             <a mat-list-item [routerLink]="'/negocios/eventos'">Nuestros eventos</a>
             <a mat-list-item [routerLink]="'/negocios/crear-evento'">Crea un evento</a>
