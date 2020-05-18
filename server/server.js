@@ -4,7 +4,7 @@ const app = express();
 require('dotenv').config();
 
 app.set('view engine', 'ejs');
-app.use(express.json());
+app.use(express.json({limit: '50mb', extended: true}));
 app.use(express.urlencoded({extended: true}));
 app.use(cors());
 // Para que se pueda acceder a la carpeta public

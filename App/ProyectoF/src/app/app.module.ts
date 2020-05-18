@@ -14,6 +14,7 @@ import { ToolbarComponent, ConfirmDialog } from './components/toolbar/toolbar.co
 import { BusinessToolbarComponent, LogoutDialog } from './components/business-toolbar/business-toolbar.component';
 import { EventCardComponent } from './components/event-card/event-card.component';
 import { BusinessEventCardComponent } from './components/business-event-card/business-event-card.component';
+import { TicketComponent } from './components/ticket/ticket.component';
 import { EventInfoDialog } from './components/dialogs/event-info/event-info.dialog';
 
 // Páginas
@@ -64,6 +65,7 @@ import { NumericDirective } from './numeric.directive';
     ToolbarComponent,
     EventCardComponent,
     BusinessEventCardComponent,
+    TicketComponent,
     ConfirmDialog,
     LogoutDialog,
     EventInfoDialog,

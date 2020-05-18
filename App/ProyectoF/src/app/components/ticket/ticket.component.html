@@ -1,0 +1,25 @@
+<div class="ticket">
+    <div class="top">
+        <p>{{ticket.code}}</p>
+        <p>Cantidad: x{{ticket.qty}}</p>
+    </div>
+    <h1>{{ticket.event_name}}</h1>
+    <div class="center-container">
+        <div>
+            <p>{{ticket.date}}</p>
+            <p>Horario: {{ticket.schedule}}</p>
+            <p>Ubicación: {{ticket.location}}</p>
+            <p>Comprado el: {{ticket.bought_at}}</p>
+            <p *ngIf="ticket.ended(); else available"><span style="color:red;">Finalizado</span></p>
+            <ng-template #available><span style="color:green">Por comenzar</span></ng-template>
+        </div>
+        <img *ngIf="ticket.img_url != 'default'; else default" src="{{ticket.img_url}}" alt="Imagen del evento">
+        <ng-template #default>
+            <img src="assets/img/default-img_event.jpg" alt="Imagen del evento">
+        </ng-template>
+    </div>
+    <div class="bottom">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png" width="35px" alt="QR">
+        <h4>Total: {{ticket.price * ticket.qty}}€ (Imp. Incl)</h4>
+    </div>
+</div>

@@ -1,10 +1,13 @@
 <div class="event-card">
     <div class="header">
         <h1>{{event.name}}</h1>
-        <mat-icon matTooltip="Ver detalles">event_note</mat-icon>
+        <mat-icon matTooltip="Ver detalles" (click)="openDialog()">event_note</mat-icon>
     </div>
     <div class="card-container">
-        <img src="assets/img/default-img_event.jpg" alt="Imagen evento">
+        <img *ngIf="event.img_url != 'default'; else default" src="{{event.img_url}}" alt="Imagen evento">
+        <ng-template #default>
+            <img src="assets/img/default-img_event.jpg" alt="Imagen evento">
+        </ng-template>
         <div class="description">{{event.description}}</div>
     </div>
     <h2>Precio: {{event.price}}€</h2>

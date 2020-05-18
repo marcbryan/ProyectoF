@@ -1,1 +1,8 @@
-<p>my-tickets works!</p>
+<ul *ngIf="(tickets | async)?.length > 0" class="">
+    <li *ngFor="let ticket of tickets | async">
+        <ticket [ticket]="ticket"></ticket>
+    </li>
+</ul>
+<div class="msg" *ngIf="(tickets | async)?.length == 0">
+    <p>No has comprado ninguna entrada, para comprar entradas hazlo en nuestra app.</p>
+</div>

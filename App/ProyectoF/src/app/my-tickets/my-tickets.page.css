@@ -1,0 +1,33 @@
+ul {
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    list-style: none;
+}
+
+ul > li {
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.msg {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+@media(max-width: 1025px) {
+    ul {
+        display: block;
+    }
+    ul > li {
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+}

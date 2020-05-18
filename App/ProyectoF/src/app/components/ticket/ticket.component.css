@@ -1,0 +1,32 @@
+.ticket {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background: #DBFFFD;
+    max-width: 450px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.ticket {
+    font-weight: bold;
+}
+.ticket h1 {
+    text-align: center;
+    font-weight: bold;
+}
+.ticket > .center-container {
+    display: flex;
+    justify-content: space-between;
+}
+.ticket > .center-container > img {
+    max-width: 195px;
+    max-height: 135px;
+}
+.ticket h4 {
+    margin: 0;
+    font-weight: bold;
+}
+.ticket .top, .ticket > .bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+}

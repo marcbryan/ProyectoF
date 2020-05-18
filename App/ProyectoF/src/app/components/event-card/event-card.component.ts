@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Event } from 'src/app/services/events/event';
+import { MatDialog } from '@angular/material/dialog';
+import { EventInfoDialog } from '../dialogs/event-info/event-info.dialog';
 
 @Component({
   selector: 'event-card',
@@ -9,8 +11,12 @@ import { Event } from 'src/app/services/events/event';
 export class EventCardComponent implements OnInit {
   @Input() event: Event;  
 
-  constructor() {}
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {}
+
+  openDialog() {
+    this.dialog.open(EventInfoDialog, {data: this.event});
+  }
 
 }

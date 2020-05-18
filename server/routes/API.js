@@ -23,6 +23,9 @@ router.post('/user/fav-event', user_controller.user_favourite_events);
 // POST request -> añadir amigos
 router.post('/user/add', user_controller.user_add_friend);
 
+// GET request -> obtener información de las entradas
+router.get('/user/tickets', user_controller.getTicketsInfo);
+
 // --- API Events ---
 
 // GET request -> obtener eventos disponibles

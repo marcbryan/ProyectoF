@@ -1,4 +1,5 @@
 var User = require('../models/User');
+var Event = require('../models/Event');
 var validator = require('email-validator');
 var jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -263,6 +264,75 @@ exports.user_add_friend = function(req, res) {
                 
             }
         });
+    }
+}
+
+/**
+ * Se encarga de juntar la información de los eventos con la de las del array de entradas del usuario,
+ * para luego enviar un array con esta información
+ */
+exports.getTicketsInfo = function(req, res) {
+    let uid = req.query.uid;
+    if (isset(uid)) {
+        User.find({_id: uid}, 'tickets', {limit: 1}, function(err, docs) {
+            if (err) {
+                onErrorQuery(err, res);
+                return;
+            }
+            if (docs.length > 0) {
+                let tickets = docs[0].tickets.toObject();
+                if (tickets.length > 0) {
+                    let events = [];
+                    tickets.forEach(ticket => {
+                        events.push(ticket.event_id);
+                    });
+
+                    var counts = {};
+                    for (var i = 0; i < events.length; i++) {
+                        var event_id = events[i];
+                        counts[event_id] = counts[event_id] ? counts[event_id] + 1 : 1;
+                    }
+
+                    Event.find({_id: { $in: events}}, '_id name price starts ends location img_url', function(err, docs) {
+                        if (err) {
+                            onErrorQuery(err, res);
+                            return;
+                        }
+                        let info_tickets = [];
+                        docs.forEach(document => {                            
+                            let doc = document.toObject();
+                            delete doc._id;
+                            doc.id = document.id;
+                            let count = counts[doc.id];
+                            let flTickets = tickets.filter(t => t.event_id === doc.id);
+                            for (let i = 0; i < count; i++) {
+                                let ticket = Object.create(doc);
+                                ticket.event_id = doc.id;
+                                ticket.event_name = doc.name;
+                                ticket.price = doc.price;
+                                ticket.location = doc.location;
+                                ticket.img_url = doc.img_url;
+                                ticket.code = flTickets[i].ticket_code;
+                                ticket.qty = flTickets[i].qty;
+                                ticket.bought_at = Event.formatDate(flTickets[i].bought_at);
+                                ticket.starts = Event.formatDate(doc.starts);
+                                ticket.ends = Event.formatDate(doc.ends);
+                                delete ticket.id;
+                                delete ticket.name;
+                                info_tickets.push(ticket);
+                            }
+                        });
+                        res.send({status: 'OK', data: info_tickets});
+                    });
+                } else {
+                    res.send({status: 'OK', data: []});
+                }
+            } else {
+                res.status(403).send({status: 'ERROR', msg: 'Error al obtener las entradas'});
+            }
+        });
+    } else {
+        res.status(403).send({status: 'ERROR', msg: 'Error al obtener las entradas'});
     }
 }
 
