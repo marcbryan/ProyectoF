@@ -9,7 +9,7 @@ import { Event } from './event';
   providedIn: 'root'
 })
 export class EventsService {
-  private endpoint: string = 'http://proyectof.tk/api/events';
+  private endpoint: string = 'https://proyectof.tk/api/events';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient, public router: Router) {}

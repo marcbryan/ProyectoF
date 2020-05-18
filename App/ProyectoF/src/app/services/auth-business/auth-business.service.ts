@@ -10,7 +10,7 @@ import { BusinessUser } from './business-user';
   providedIn: 'root'
 })
 export class AuthBusinessService implements IAuthService {
-  endpoint: string = 'http://proyectof.tk/api/business';
+  endpoint: string = 'https://proyectof.tk/api/business';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser: any;
 

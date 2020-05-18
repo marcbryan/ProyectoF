@@ -13,7 +13,7 @@ import * as moment from 'moment';
 })
 
 export class AuthService implements IAuthService {
-  endpoint: string = 'http://proyectof.tk/api/user';
+  endpoint: string = 'https://proyectof.tk/api/user';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser: any;
 

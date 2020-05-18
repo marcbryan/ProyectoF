@@ -15,7 +15,7 @@
         "description": "Toda la documentación sobre las APIs que utilizan la app Android tanto como la app Web",
         "buttonText": "Documentación",
         "img": "assets/img/logo.png",
-        "href": "http://proyectof.tk",
+        "href": "https://proyectof.tk",
         "size": {
             "width": "auto",
             "height": "64px"
