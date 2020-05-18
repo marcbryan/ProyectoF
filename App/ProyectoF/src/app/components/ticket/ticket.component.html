@@ -11,7 +11,7 @@
             <p>Ubicación: {{ticket.location}}</p>
             <p>Comprado el: {{ticket.bought_at}}</p>
             <p *ngIf="ticket.ended(); else available"><span style="color:red;">Finalizado</span></p>
-            <ng-template #available><span style="color:green">Por comenzar</span></ng-template>
+            <ng-template #available><p style="color:green">Por comenzar</p></ng-template>
         </div>
         <img *ngIf="ticket.img_url != 'default'; else default" src="{{ticket.img_url}}" alt="Imagen del evento">
         <ng-template #default>

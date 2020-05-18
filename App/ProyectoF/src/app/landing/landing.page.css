@@ -10,7 +10,7 @@
 }
 .background > mat-icon:focus { outline: none; }
 ::ng-deep .mat-tooltip { font-size: 12px!important; }
-.background { width: 100vw; height: 100vh; background-image: url('../../assets/img/default-img_event.jpg'); }
+.background { width: 100vw; height: 100vh; background-image: url('../../assets/img/default-img_event.jpg'); background-repeat: no-repeat; background-size: cover; }
 .background > h1 { 
     color: white;
     padding-top: 5vh;
@@ -44,7 +44,8 @@
 
 @media(max-width: 650px) {
     .background > h1 { line-height: 1.75; }
-    .background > .center { flex-direction: column; }
+    .background > .center { flex-direction: column; align-items: center; }
+    .background > .center > mat-card { width: inherit; }
     .background > .center > .card:first-of-type { margin-right: 0; margin-bottom: 10px; }
     .card > h2 { font-size: 14px; line-height: 1.5; }
 }

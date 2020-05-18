@@ -19,6 +19,7 @@
 .ticket > .center-container > img {
     max-width: 195px;
     max-height: 135px;
+    margin-left: 10px;
 }
 .ticket h4 {
     margin: 0;
@@ -29,4 +30,15 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
+}
+
+@media (max-width: 490px) {
+    .ticket > .center-container {
+        flex-direction: column-reverse;
+    }
+
+    .ticket > .center-container > img {
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
 }
