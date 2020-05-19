@@ -18,6 +18,7 @@ var seeds = [
     require('./seeds/EventsSeeder.js')
 ];
 var seedsDone = 0;
+var update = require('./seeds/UpdateSeeder.js');
 
 var URI = 'mongodb+srv://'+host+'/'+db_name+'?retryWrites=true&w=majority';
 const mongoose = require('mongoose');
@@ -38,9 +39,12 @@ mongoose.connect(URI, {
 var next = () => {
     seedsDone++;
     if (seedsDone === seeds.length) {
-        mongoose.connection.close(function () {
-            console.log(`Seeding Completed! (${seedsDone} seeds)`);
-            process.exit(1);
+        update(() => {
+            console.log('Update completed!');
+            mongoose.connection.close(function () {
+                console.log(`Seeding Completed! (${seedsDone} seeds)`);
+                process.exit(1);
+            });
         });
     }
 };
