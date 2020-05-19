@@ -20,7 +20,7 @@
     <div class="toc-wrapper">
       <img src="images/logo-b62ba352.png" class="logo" alt="Logo" />
       <div class="search">
-        <input type="text" class="search" id="input-search" placeholder="Search">
+        <input type="text" class="search" id="input-search" placeholder="Buscar">
       </div>
       <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
@@ -41,9 +41,15 @@
                 datos usuario</a>
             </li>
             <li>
-              <a href="#anadir-eliminar-evento-de-los-eventos-favoritos-del-usuario" class="toc-h2 toc-link"
-                data-title="Añadir/Eliminar evento de los eventos favoritos del usuario">Añadir/Eliminar evento de los
-                eventos favoritos del usuario</a>
+              <a href="#anadir-eliminar-evento-de-favoritos" class="toc-h2 toc-link"
+                data-title="Añadir/Eliminar evento de favoritos">Añadir/Eliminar evento de favoritos</a>
+            </li>
+            <li>
+              <a href="#anadir-amigos" class="toc-h2 toc-link" data-title="Añadir amigos">Añadir amigos</a>
+            </li>
+            <li>
+              <a href="#obtener-informacion-entradas" class="toc-h2 toc-link"
+                data-title="Obtener información entradas">Obtener información entradas</a>
             </li>
           </ul>
         </li>
@@ -55,12 +61,32 @@
                 todos los eventos</a>
             </li>
             <li>
-              <a href="#obtener-los-eventos-favoritos-del-usuario" class="toc-h2 toc-link"
-                data-title="Obtener los eventos favoritos del usuario">Obtener los eventos favoritos del usuario</a>
+              <a href="#obtener-eventos-favoritos" class="toc-h2 toc-link" data-title="Obtener eventos favoritos">Obtener
+                eventos favoritos</a>
             </li>
             <li>
               <a href="#comprar-entrada-s-de-un-evento" class="toc-h2 toc-link"
                 data-title="Comprar entrada/s de un evento">Comprar entrada/s de un evento</a>
+            </li>
+            <li>
+              <a href="#obtener-los-eventos-de-un-negocio" class="toc-h2 toc-link"
+                data-title="Obtener los eventos de un negocio">Obtener los eventos de un negocio</a>
+            </li>
+            <li>
+              <a href="#crear-un-evento" class="toc-h2 toc-link" data-title="Crear un evento">Crear un evento</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#negocios" class="toc-h1 toc-link" data-title="Negocios">Negocios</a>
+          <ul class="toc-list-h2">
+            <li>
+              <a href="#login-como-usuario-de-un-negocio" class="toc-h2 toc-link"
+                data-title="Login como usuario de un negocio">Login como usuario de un negocio</a>
+            </li>
+            <li>
+              <a href="#registrar-un-negocio-y-una-cuenta" class="toc-h2 toc-link"
+                data-title="Registrar un negocio y una cuenta">Registrar un negocio y una cuenta</a>
             </li>
           </ul>
         </li>
@@ -246,9 +272,8 @@
             </tr>
           </tbody>
         </table>
-        <h2 id='anadir-eliminar-evento-de-los-eventos-favoritos-del-usuario'>Añadir/Eliminar evento de los eventos
-          favoritos del usuario</h2>
-        <p>Este endpoint sirve para añadir o eliminar un evento de favoritos</p>
+        <h2 id='anadir-eliminar-evento-de-favoritos'>Añadir/Eliminar evento de favoritos</h2>
+        <p>Este endpoint sirve para añadir o eliminar un evento de los eventos favoritos del usuario</p>
         <h3 id='http-request-4'>HTTP Request</h3>
         <p><code>POST https://proyectof.tk/api/user/fav-event</code></p>
         <h3 id='body-parameters-4'>Body Parameters</h3>
@@ -271,6 +296,94 @@
             <tr>
               <td>fav</td>
               <td>true o false, true si queremos añadirlo y false si queremos eliminarlo</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id='anadir-amigos'>Añadir amigos</h2>
+        <p>Este endpoint sirve para añadir a un amigo, una vez añadamos a un amigo, también se añadirá nuestro usuario a
+          su lista de amigos</p>
+        <h3 id='http-request-5'>HTTP Request</h3>
+        <p><code>POST https://proyectof.tk/api/user/add</code></p>
+        <h3 id='body-parameters-5'>Body Parameters</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Parámetro</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>uid</td>
+              <td>El ID del usuario que quiere añadir a alguien como amigo</td>
+            </tr>
+            <tr>
+              <td>email</td>
+              <td>El correo electrónico del amigo que queremos añadir</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id='obtener-informacion-entradas'>Obtener información entradas</h2>
+        <blockquote>
+          <p>Este seria un ejemplo de la respuesta</p>
+        </blockquote>
+        <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"event_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ec3c42dbea05b3b8c3fcef7"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"event_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Concierto en Pontevedra"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">11.09</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Calle Rosas 11, Pontevedra"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PF-1589888677017"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"qty"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"bought_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19/05/2020 13:44"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"starts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"24/05/2020 01:00"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"ends"</span><span class="p">:</span><span class="w"> </span><span class="s2">"24/05/2020 04:00"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"event_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ec3c42dbea05b3b8c3fcef9"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"event_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gran evento en Reus"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">24.45</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Avenida Cuellar 179, Reus"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PF-1589888753733"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"qty"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"bought_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19/05/2020 13:45"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"starts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26/05/2020 22:15"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"ends"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27/05/2020 02:15"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"event_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ec3c80ebdf2565b69c20322"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"event_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Concierto en Barcelona"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">20.25</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Palau Sant Jordi, Barcelona"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://proyectof-bucket.s3.amazonaws.com/img-1589889038168.jpeg"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PF-1589889289382"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"qty"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"bought_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19/05/2020 13:54"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"starts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20/05/2020 23:00"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"ends"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21/05/2020 00:55"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+  </span></code></pre>
+        <p>Este endpoint sirve para juntar la información de una entrada con la del evento correspondiente</p>
+        <h3 id='http-request-6'>HTTP Request</h3>
+        <p><code>GET https://proyectof.tk/api/user/tickets</code></p>
+        <h3 id='query-parameters'>Query Parameters</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Parámetro</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>uid</td>
+              <td>El ID del usuario que quiere ver sus entradas</td>
             </tr>
           </tbody>
         </table>
@@ -318,13 +431,13 @@
   </span><span class="p">}</span><span class="w">
   </span></code></pre>
         <p>Este endpoint sirve para obtener todos los eventos.</p>
-        <h3 id='http-request-5'>HTTP Request</h3>
+        <h3 id='http-request-7'>HTTP Request</h3>
         <p><code>GET https://proyectof.tk/api/events</code></p>
-        <h2 id='obtener-los-eventos-favoritos-del-usuario'>Obtener los eventos favoritos del usuario</h2>
+        <h2 id='obtener-eventos-favoritos'>Obtener eventos favoritos</h2>
         <p>Este endpoint sirve para obtener la información de los eventos favoritos de un usuario.</p>
-        <h3 id='http-request-6'>HTTP Request</h3>
+        <h3 id='http-request-8'>HTTP Request</h3>
         <p><code>GET https://proyectof.tk/events/fav</code></p>
-        <h3 id='body-parameters-5'>Body Parameters</h3>
+        <h3 id='body-parameters-6'>Body Parameters</h3>
         <table>
           <thead>
             <tr>
@@ -347,17 +460,17 @@
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 entradas compradas correctamente"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticket"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"ticket_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PF-1589906917058"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"event_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5eb07452r90614c20e4c1r5"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"qty"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bought_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-08T15:21:28.190+00:00"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
-
   </span></code></pre>
         <p>Este endpoint se utiliza para comprar entradas</p>
-        <h3 id='http-request-7'>HTTP Request</h3>
+        <h3 id='http-request-9'>HTTP Request</h3>
         <p><code>POST https://proyectof.tk/api/tickets/buy</code></p>
-        <h3 id='body-parameters-6'>Body Parameters</h3>
+        <h3 id='body-parameters-7'>Body Parameters</h3>
         <table>
           <thead>
             <tr>
@@ -407,6 +520,158 @@
             <tr>
               <td>nameOnCard</td>
               <td>El nombre que aparece en la tarjeta</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id='obtener-los-eventos-de-un-negocio'>Obtener los eventos de un negocio</h2>
+        <p>Este endpoint es bastante similar al de obtener eventos, devuelve eventos, pero la diferencia es que solo
+          obtenemos los eventos de un negocio</p>
+        <h3 id='http-request-10'>HTTP Request</h3>
+        <p><code>GET https://proyectof.tk/api/events/business</code></p>
+        <h3 id='query-parameters-2'>Query Parameters</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Parámetro</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td>El ID del negocio del que queremos sus eventos</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id='crear-un-evento'>Crear un evento</h2>
+        <p>Este endpoint sirve para crear un evento, se le puede asignar una imagen, si la subida de la imagen falla, se
+          creará el evento con la imagen por defecto y se responderá con un mensaje de error de subida de la imagen</p>
+        <h3 id='http-request-11'>HTTP Request</h3>
+        <p><code>POST https://proyectof.tk/api/events/create</code></p>
+        <h3 id='body-parameters-8'>Body Parameters</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Parámetro</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>name</td>
+              <td>El nombre del evento que queremos crear</td>
+            </tr>
+            <tr>
+              <td>description</td>
+              <td>La descripción del evento</td>
+            </tr>
+            <tr>
+              <td>price</td>
+              <td>El precio del evento</td>
+            </tr>
+            <tr>
+              <td>starts</td>
+              <td>La fecha y la hora de inicio del evento (timestamp)</td>
+            </tr>
+            <tr>
+              <td>ends</td>
+              <td>La fecha y la hora en la que termina el evento (timestamp)</td>
+            </tr>
+            <tr>
+              <td>location</td>
+              <td>El lugar donde se realizará el evento</td>
+            </tr>
+            <tr>
+              <td>ticketsForSale</td>
+              <td>El número de entradas a la venta</td>
+            </tr>
+            <tr>
+              <td>business_id</td>
+              <td>El ID del negocio que quiere crear el evento</td>
+            </tr>
+            <tr>
+              <td>image (opcional)</td>
+              <td>Este parámetro es opcional, si no se asigna, se pondrá una imagen por defecto. La imagen debe enviarse
+                en el formato base64</td>
+            </tr>
+          </tbody>
+        </table>
+        <h1 id='negocios'>Negocios</h1>
+        <h2 id='login-como-usuario-de-un-negocio'>Login como usuario de un negocio</h2>
+        <p>Este endpoint es similar al login de usuarios estándar, pero para usuarios de un negocio, si con este endpoint
+          intentamos hacer login con un usuario estándar, fallará</p>
+        <h3 id='http-request-12'>HTTP Request</h3>
+        <p><code>POST https://proyectof.tk/api/business/login</code></p>
+        <h3 id='body-parameters-9'>Body Parameters</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Parámetro</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>email</td>
+              <td>El correo electrónico del usuario de un negocio</td>
+            </tr>
+            <tr>
+              <td>password</td>
+              <td>La contraseña del usuario de un negocio</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id='registrar-un-negocio-y-una-cuenta'>Registrar un negocio y una cuenta</h2>
+        <blockquote>
+          <p>Este seria un ejemplo del objeto JSON que deberiamos enviar</p>
+        </blockquote>
+        <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"business"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Negocio de prueba"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Calle de Prueba, Barcelona"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Barcelona"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"08910"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"920123012"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jefe"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"De Prueba"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jefe@prueba.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"612312312"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+  </span></code></pre>
+        <p>Este endpoint sirve para registar un negocio y una cuenta, se comprobará que el teléfono y el correo
+          electrónico de la nueva cuenta no estan siendo utilizados por otra. Si fueran utilizados por otra cuenta, se
+          responderá con un mensaje de error</p>
+        <h3 id='http-request-13'>HTTP Request</h3>
+        <p><code>POST https://proyectof.tk/api/business/register</code></p>
+        <h3 id='body-parameters-10'>Body Parameters</h3>
+        <aside class="notice">
+          <span style="margin:0;margin-left:-5px;">El parámetro <strong>business</strong> debe ser un objeto JSON con los
+            siguientes datos: </span></br>
+          <strong>name, address, city, zipcode, phone</strong>
+          <p style="margin: 1em 0 0 0;">El parámetro <strong>user</strong> debe ser un objeto JSON con los siguientes
+            datos:</p>
+          <strong>name, last_name, email, password, phone</strong>
+        </aside>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Parámetro</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>business</td>
+              <td>Este parámetro debe incluir un objeto JSON con los datos especificados</td>
+            </tr>
+            <tr>
+              <td>user</td>
+              <td>Este parámetro debe incluir un objeto JSON con los datos especificados</td>
             </tr>
           </tbody>
         </table>
